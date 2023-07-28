@@ -42,7 +42,7 @@ function VulnAD-GetRandom {
 
 function VulnAD-AddADGroup {
     Param(
-        [array]$GroupList
+        [array]$GroupList,
 	[int]$GroupNumber = 5
 
     )

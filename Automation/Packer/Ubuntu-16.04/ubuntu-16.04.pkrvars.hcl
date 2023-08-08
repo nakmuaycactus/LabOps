@@ -1,13 +1,13 @@
 #ESXI Settings
-  vcenter_server          = "192.168.3.150" 
-  host                    = "localhost.localdomain"
-  username                = "root"
-  password                = "Thrunters1!FTW"
+  vcenter_server          = "" 
+  host                    = ""
+  username                = ""
+  password                = ""
   insecure_connection     = true
-  datastore               = "AD-VMs"
-  iso_paths               = ["[AD-VMs] ISOs/ubuntu-16.04.7-server-amd64.iso"]
-  network                 = "VM Network"
-  network_card            = "vmxnet3"
+  datastore               = ""
+  iso_paths               = [""]
+  network                 = ""
+  network_card            = ""
 
 #Created VM Config
   vm_name                 = "packer_ubuntu-16-04"  

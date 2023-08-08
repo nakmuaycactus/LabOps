@@ -22,7 +22,7 @@ variable "floppy_files" {}
 variable "boot_command" {}
 variable "output_directory" {}
 
-source "vsphere-iso" "ubuntu-16-04" {
+source "vsphere-iso" "linux" {
   vcenter_server          = var.vcenter_server
   username                = var.username
   password                = var.password
@@ -60,7 +60,7 @@ source "vsphere-iso" "ubuntu-16-04" {
 }
  
 build {
- sources = ["source.vsphere-iso.ubuntu-16-04"]
+ sources = ["source.vsphere-iso.linux"]
  
   provisioner "shell" {
     inline = ["ls /"]

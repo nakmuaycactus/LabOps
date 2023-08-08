@@ -1,10 +1,11 @@
+#ESXI Settings
 variable "vcenter_server" {}
 variable "host" {}
 variable "username" {}
 variable "password" {}
 variable "insecure_connection" {}
 variable "datastore" {}
-variable "iso_paths" {} 
+variable "iso_paths" {}
 variable "network" {}
 variable "network_card" {}
 variable "vm_name" {}
@@ -26,12 +27,12 @@ source "vsphere-iso" "ubuntu-16-04" {
   username                = var.username
   password                = var.password
   insecure_connection     = var.insecure_connection
-
+ 
   vm_name                 = var.vm_name
   host                    = var.host
   datastore               = var.datastore
   iso_paths               = var.iso_paths
-
+ 
   CPUs                    = var.CPUs
   RAM                     = var.RAM
   RAM_reserve_all         = var.RAM_reserve_all
@@ -46,22 +47,23 @@ source "vsphere-iso" "ubuntu-16-04" {
     network               = var.network
     network_card          = var.network_card
   }
-
+ 
   boot_command            = var.boot_command
-  
+ 
   ssh_username            = var.ssh_username
   ssh_password            = var.ssh_password
-  
+ 
   export {
     force                 = true
     output_directory      = var.output_directory
   }
 }
-
+ 
 build {
-  sources = ["source.vsphere-iso.ubuntu-16-04"]
-
+ sources = ["source.vsphere-iso.ubuntu-16-04"]
+ 
   provisioner "shell" {
     inline = ["ls /"]
   }
 }
+ 

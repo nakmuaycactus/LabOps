@@ -1,3 +1,26 @@
+variable "vcenter_server" {}
+variable "host" {}
+variable "username" {}
+variable "password" {}
+variable "insecure_connection" {}
+variable "datastore" {}
+variable "iso_paths" {} 
+variable "network" {}
+variable "network_card" {}
+variable "vm_name" {}
+variable "guest_os_type" {}
+variable "CPUs" {}
+variable "RAM" {}
+variable "RAM_reserve_all" {}
+variable "disk_controller_type" {}
+variable "disk_size" {}
+variable "disk_thin_provisioned" {}
+variable "ssh_username" {}
+variable "ssh_password" {}
+variable "floppy_files" {}
+variable "boot_command" {}
+variable "output_directory" {}
+
 source "vsphere-iso" "ubuntu-16-04" {
   vcenter_server          = var.vcenter_server
   username                = var.username

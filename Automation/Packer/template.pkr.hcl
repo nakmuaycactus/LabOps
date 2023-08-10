@@ -1,4 +1,3 @@
-#ESXI Settings
 variable "vcenter_server" {}
 variable "host" {}
 variable "username" {}
@@ -18,21 +17,28 @@ variable "disk_size" {}
 variable "disk_thin_provisioned" {}
 variable "ssh_username" {}
 variable "ssh_password" {}
-variable "floppy_files" {}
 variable "boot_command" {}
 variable "output_directory" {}
+variable "http_ip" {default = "192.168.3.157"}
+variable "http_directory" {default = "http"}
+variable "floppy_files" {default = null}
 
 source "vsphere-iso" "linux" {
   vcenter_server          = var.vcenter_server
   username                = var.username
   password                = var.password
   insecure_connection     = var.insecure_connection
- 
   vm_name                 = var.vm_name
   host                    = var.host
+  guest_os_type           = var.guest_os_type
   datastore               = var.datastore
   iso_paths               = var.iso_paths
- 
+  http_directory          = var.http_directory
+  http_ip                 = var.http_ip
+  floppy_files            = var.floppy_files
+  ssh_username            = var.ssh_username
+  ssh_password            = var.ssh_password
+  boot_command            = var.boot_command
   CPUs                    = var.CPUs
   RAM                     = var.RAM
   RAM_reserve_all         = var.RAM_reserve_all
@@ -41,18 +47,10 @@ source "vsphere-iso" "linux" {
     disk_size             = var.disk_size
     disk_thin_provisioned = var.disk_thin_provisioned
   }
-  floppy_files            = var.floppy_files
-  guest_os_type           = var.guest_os_type
   network_adapters {
     network               = var.network
     network_card          = var.network_card
   }
- 
-  boot_command            = var.boot_command
- 
-  ssh_username            = var.ssh_username
-  ssh_password            = var.ssh_password
- 
   export {
     force                 = true
     output_directory      = var.output_directory

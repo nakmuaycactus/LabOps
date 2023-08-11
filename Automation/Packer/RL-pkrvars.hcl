@@ -22,4 +22,4 @@
   ssh_password          = "packer"  
 # floppy_files          = [""]
   output_directory      = "./output/RL"
-  boot_command          = ["<tab><bs><bs><bs><bs><bs>","inst.text ip=192.168.3.156:255.255.255.0::eth0:none nameserver=8.8.8.8 inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/RL-ks.cfg","<enter>"]
+  boot_command          = ["<tab><bs><bs><bs><bs><bs>","inst.cmdline ip=192.168.3.156:255.255.255.0::eth0:none nameserver=8.8.8.8 inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/RL-ks.cfg","<enter>"]

@@ -9,8 +9,8 @@
   network_card          = "vmxnet3"
 
 #Created VM Config
-  vm_name               = "pkr_KL"  
-  guest_os_type         = "Centos64Guest" 
+  vm_name               = "pkrKL"  
+  guest_os_type         = "debian8_64Guest" 
   iso_paths             = ["[AD-VMs] ISOs/kali-linux-2023.2a-installer-amd64.iso"]  
   CPUs                  = 4
   RAM                   = 8192
@@ -22,4 +22,14 @@
   ssh_password          = "packer"  
 # floppy_files          = [""]
   output_directory      = "./output/KL"
-  boot_command          = ["<tab><bs><bs><bs><bs><bs>","inst.text ip=192.168.3.156:255.255.255.0::eth0:none nameserver=8.8.8.8 inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg","<enter>"]
+#  boot_command          = ["<tab><bs><bs><bs><bs><bs>","inst.text ip=192.168.3.156:255.255.255.0::eth0:none nameserver=8.8.8.8 inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg","<enter>"]
+boot_command = [
+#"<esc> ip=192.168.3.156:255.255.255.0::eth0:none nameserver=8.8.8.8", 
+        "<esc><wait>",
+        "install <wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/KL-preseed.cfg",
+        " debian-installer=en_US.UTF-8 auto locale=en_US.UTF-8 netcfg/choose_interface=eth0 ",
+        " kbd-chooser/method=us keyboard-configuration/xkb-keymap=us ",
+#        " netcfg/get_hostname={{ .Name }} netcfg/get_domain=vagrantup.com ",
+        " fb=false debconf/frontend=noninteractive console-setup/ask_detect=false ",
+        " console-keymaps-at/keymap=us grub-installer/bootdev=/dev/sda netcfg/disable_dhcp=true<enter>"]

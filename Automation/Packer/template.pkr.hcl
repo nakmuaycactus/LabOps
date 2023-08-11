@@ -1,27 +1,28 @@
-variable "vcenter_server" {}
-variable "host" {}
-variable "username" {}
-variable "password" {}
-variable "insecure_connection" {}
-variable "datastore" {}
-variable "iso_paths" {}
-variable "network" {}
-variable "network_card" {}
-variable "vm_name" {}
+variable "vcenter_server" {default="192.168.3.150"}
+variable "host" {default="localhost.localdomain"}
+variable "username" {default="root"}
+variable "password" {default="Thrunters1!FTW"}
+variable "insecure_connection" {default=true}
+variable "datastore" {default="AD-VMs"}
+variable "network" {default="VM Network"}
+variable "network_card" {default="vmxnet3"}
+
+variable "vm_name" {default="New VM"}
 variable "guest_os_type" {}
-variable "CPUs" {}
-variable "RAM" {}
-variable "RAM_reserve_all" {}
-variable "disk_controller_type" {}
-variable "disk_size" {}
-variable "disk_thin_provisioned" {}
-variable "ssh_username" {}
-variable "ssh_password" {}
+variable "iso_paths" {}
+variable "CPUs" {default=4}
+variable "RAM" {default=8192}
+variable "RAM_reserve_all" {default=true}
+variable "disk_controller_type" {default=["pvscsi"]}
+variable "disk_size" {default=32768}
+variable "disk_thin_provisioned" {default=true}
+variable "ssh_username" {default="packer"}
+variable "ssh_password" {default="packer"}
+variable "http_ip" {default="192.168.3.157"}
+variable "http_directory" {default="http"}
+variable "floppy_files" {default=null}
+variable "output_directory" {default="output/misc"}
 variable "boot_command" {}
-variable "output_directory" {}
-variable "http_ip" {default = "192.168.3.157"}
-variable "http_directory" {default = "http"}
-variable "floppy_files" {default = null}
 
 source "vsphere-iso" "linux" {
   vcenter_server          = var.vcenter_server

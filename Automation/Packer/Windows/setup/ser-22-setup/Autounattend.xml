@@ -57,7 +57,8 @@
                     <!--<Key>9PBKX-4NHGT-QWV4C-4JD94-TVKQ6</Key>-->
                     <!--D2N9P-3P6X9-2R39C-7RTCD-MDVJX -->
 		    <WillShowUI>OnError</WillShowUI>
-                </ProductKey>
+                    <Key></Key>
+		</ProductKey>
                 <AcceptEula>true</AcceptEula>
                 <FullName>Packer</FullName>
                 <Organization>Packer</Organization>

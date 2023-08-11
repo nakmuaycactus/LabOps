@@ -56,6 +56,7 @@
                     <!-- You must uncomment the Key element (and optionally insert your own key) if you are using retail or volume license ISOs -->
                     <!--<Key>9PBKX-4NHGT-QWV4C-4JD94-TVKQ6</Key>-->
                     <!--D2N9P-3P6X9-2R39C-7RTCD-MDVJX -->
+		    <Key></Key>
 		    <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>

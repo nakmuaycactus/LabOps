@@ -59,8 +59,8 @@
 		    <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
-                <FullName>Vagrant</FullName>
-                <Organization>Vagrant</Organization>
+                <FullName>Packer</FullName>
+                <Organization>Packer</Organization>
             </UserData>
     </component>
 
@@ -80,20 +80,9 @@
             <OEMInformation>
                 <HelpCustomized>false</HelpCustomized>
             </OEMInformation>
-            <ComputerName>vagrant-2016</ComputerName>
+            <ComputerName>packer-2016</ComputerName>
             <TimeZone>Pacific Standard Time</TimeZone>
             <RegisteredOwner/>
-        </component>
-	
-	<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <RunSynchronous>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>1</Order>
-                    <!-- Install VMware Tools from windows.iso -->
-                    <Path>a:\vmtools.cmd</Path>
-                    <WillReboot>Always</WillReboot>
-                </RunSynchronousCommand>
-            </RunSynchronous>
         </component>
 
 	<component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-ServerManager-SvrMgrNc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -118,13 +107,9 @@
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
                     <Order>2</Order>
-                    <Description>Set Execution Policy 32 Bit</Description>
-                    <Path>cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</Path>
-                </RunSynchronousCommand>
-                <RunSynchronousCommand wcm:action="add">
-                    <Order>3</Order>
-                    <Description>Disable WinRM</Description>
-                    <Path>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\disable-winrm.ps1</Path>
+                    <!-- Install VMware Tools from windows.iso -->
+                    <Path>a:\vmtools.cmd</Path>
+                    <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
         </component>
@@ -133,30 +118,25 @@
         <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <AutoLogon>
                 <Password>
-                    <Value>vagrant</Value>
+                    <Value>packer</Value>
                     <PlainText>true</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
-                <Username>vagrant</Username>
+                <Username>packer</Username>
             </AutoLogon>
             <FirstLogonCommands>
+		<!--
 		<SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
                     <Description>Set Execution Policy 64 Bit</Description>
                     <Order>1</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
-		
-                <SynchronousCommand wcm:action="add">
+                Already stated above. Will uncomment for now & see if anything breaks -->
+		<SynchronousCommand wcm:action="add">
                     <CommandLine>powershell -ExecutionPolicy Bypass -File a:\setup.ps1</CommandLine>
-                    <Description>setup script 8===D</Description>
+                    <Description>setup script</Description>
                     <Order>2</Order>
-                    <RequiresUserInput>true</RequiresUserInput>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\disable-winrm.ps1</CommandLine>
-                    <Description>Disable WinRM</Description>
-                    <Order>3</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
@@ -190,9 +170,9 @@
                     <Description>Disable Hibernation Mode</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c wmic useraccount where "name='vagrant'" set PasswordExpires=FALSE</CommandLine>
+                    <CommandLine>cmd.exe /c wmic useraccount where "name='packer'" set PasswordExpires=FALSE</CommandLine>
                     <Order>10</Order>
-                    <Description>Disable password expiration for vagrant user</Description>
+                    <Description>Disable password expiration for packer user</Description>
                 </SynchronousCommand>
                 <!-- WITHOUT WINDOWS UPDATES -->
                 <!--
@@ -224,9 +204,6 @@
                 END WITH WINDOWS UPDATES -->
             </FirstLogonCommands>
 	    
-
-
-
 	    <OOBE>
                 <HideEULAPage>true</HideEULAPage>
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
@@ -238,19 +215,19 @@
             </OOBE>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>vagrant</Value>
+                    <Value>packer</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>vagrant</Value>
+                            <Value>packer</Value>
                             <PlainText>true</PlainText>
                         </Password>
                         <Group>administrators</Group>
-                        <DisplayName>Vagrant</DisplayName>
-                        <Name>vagrant</Name>
-                        <Description>Vagrant User</Description>
+                        <DisplayName>Packer</DisplayName>
+                        <Name>packer</Name>
+                        <Description>Packer User</Description>
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>

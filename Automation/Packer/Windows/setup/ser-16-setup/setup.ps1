@@ -31,10 +31,35 @@ $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
 # disable priv fw
 # set-netfirewallprofile -profile private,public -enabled False
 
-Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+# bypass pop up
+Set-NetConnectionProfile -Name "NetworkName" -NetworkCategory Private
 
-Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+# 2016 server has to set up openssh """manually""" like this
+# can just use handy dandy cmdlet like the rest, bc that'd be too easy
+$DownloadPath = "C:\Users\packer\Downloads\OpenSSH-Win64.zip"
 
-Start-Service sshd
+# tls error if u dont include the next line
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# downloads from a github repo
+iwr -uri https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.2.2.0p1-Beta/OpenSSH-Win64.zip -OutFile $DownloadPath
+
+# extract zip
+$ExtractPath = "C:\Program Files\OpenSSH"
+Expand-Archive -Path $DownloadPath -DestinationPath $ExtractPath -Force
+
+# add openssh to path
+$env:Path += ";$ExtractPath"
+# direct invocation for install bc i had to
+Set-ExecutionPolicy Bypass
+& "$ExtractPath\OpenSSH-Win64\install-sshd.ps1"
+
+# generate host key
+Start-Process "$ExtractPath\OpenSSH-Win64\ssh-keygen.exe" -ArgumentList "-A" -Wait
+
+# set sshd service startup to auto and start it
+Set-Service -Name sshd -StartupType 'Automatic'
+
+# fw rules
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 
 

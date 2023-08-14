@@ -31,6 +31,9 @@ $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
 # disable priv fw
 # set-netfirewallprofile -profile private,public -enabled False
 
+# stop pop up
+Set-NetConnectionProfile -Name "NetworkName" -NetworkCategory Private
+
 Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0

@@ -1,4 +1,4 @@
-
+Set-ExecutionPolicy -ExecutionPolicy Bypass
 
 $IP = "192.168.3.156"
 $MaskBits = 24 # This means subnet mask = 255.255.255.0
@@ -58,8 +58,9 @@ Start-Process "$ExtractPath\OpenSSH-Win64\ssh-keygen.exe" -ArgumentList "-A" -Wa
 
 # set sshd service startup to auto and start it
 Set-Service -Name sshd -StartupType 'Automatic'
+Start-Service sshd
 
 # fw rules
-New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+New-NetFirewallRule -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 
 

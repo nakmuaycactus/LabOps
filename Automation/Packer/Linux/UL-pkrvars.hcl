@@ -1,4 +1,4 @@
-vm_name          = "pkr_UL"  
+vm_name          = "pkrUL"  
 guest_os_type    = "ubuntu64Guest"
 iso_paths        = ["[AD-VMs] ISOs/ubuntu-16.04.7-server-amd64.iso"]
 floppy_files     = ["http/UL-preseed.cfg"]

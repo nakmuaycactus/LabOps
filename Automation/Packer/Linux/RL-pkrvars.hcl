@@ -1,4 +1,4 @@
-  vm_name               = "pkr_RL"  
+  vm_name               = "pkrRL"  
   guest_os_type         = "Centos64Guest" 
   iso_paths             = ["[AD-VMs] ISOs/Rocky-9.2-x86_64-dvd.iso"]  
   output_directory      = "./output/RL"

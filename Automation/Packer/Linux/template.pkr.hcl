@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    vsphere = {
+      source  = "github.com/hashicorp/vsphere"
+      version = "~> 1"
+    }
+  }
+}
+
 variable "vcenter_server" {default="192.168.3.150"}
 variable "host" {default="localhost.localdomain"}
 variable "username" {default="root"}
@@ -6,7 +15,6 @@ variable "insecure_connection" {default=true}
 variable "datastore" {default="AD-VMs"}
 variable "network" {default="VM Network"}
 variable "network_card" {default="vmxnet3"}
-
 variable "vm_name" {default="New VM"}
 variable "guest_os_type" {}
 variable "iso_paths" {}
@@ -59,8 +67,7 @@ source "vsphere-iso" "linux" {
 }
  
 build {
- sources = ["source.vsphere-iso.linux"]
- 
+  sources = ["source.vsphere-iso.linux"]
   provisioner "shell" {
     inline = ["ls /"]
   }

@@ -42,6 +42,7 @@ source "vsphere-iso" "windows" {
   ssh_password         = var.ssh_password
   ssh_timeout          = "1h"
   ssh_clear_authorized_keys = "true"
+  shutdown_timeout     = "15m"
  
   datastore            = var.datastore
   disk_controller_type = var.disk_controller_type

@@ -20,4 +20,4 @@ ssh_password        = "packer"
 floppy_files        = ["setup/ser-22-setup/"]
 floppy_img_path     = "[AD-VMs] ISOs/pvscsi-Windows8.flp"
 output_directory    = "./output/ser-22"
-boot_command        = ["<wait1m10s>", "<tab><tab><tab>", "<enter>"]
+boot_command        = ["<wait1m10s>", "<tab><tab><tab>", "<enter>", "<wait10m>","<enter>", "<wait5s>","<enter>", "<wait5s>", "<enter>"]

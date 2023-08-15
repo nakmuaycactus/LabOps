@@ -28,11 +28,6 @@ $adapter | New-NetIPAddress `
 # Configure the DNS client server IP addresses
 $adapter | Set-DnsClientServerAddress -ServerAddresses $DNS
 
-# disable priv fw
-# set-netfirewallprofile -profile private,public -enabled False
-
-# bypass pop up
-Set-NetConnectionProfile -Name "NetworkName" -NetworkCategory Private
 
 # 2016 server has to set up openssh """manually""" like this
 # can just use handy dandy cmdlet like the rest, bc that'd be too easy

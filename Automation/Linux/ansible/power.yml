@@ -1,0 +1,13 @@
+---
+- hosts: esxi
+  tasks:
+  - name: Power on VM
+    vmware_guest_powerstate:
+      hostname: 192.168.3.150
+      username: root
+      password: Thrunters1!FTW
+      validate_certs: no
+      name: pkrUL
+      state: powered-on
+    delegate_to: localhost
+    register: deploy

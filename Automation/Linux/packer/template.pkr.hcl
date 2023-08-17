@@ -67,8 +67,15 @@ source "vsphere-iso" "linux" {
 }
  
 build {
-  sources = ["source.vsphere-iso.linux"]
+ sources = ["source.vsphere-iso.linux"]
+ 
   provisioner "shell" {
-    inline = ["ls /"]
+    inline = [
+      "ls /",
+      "mkdir -p ~/.ssh",
+      "echo 'AAAAB3NzaC1yc2EAAAADAQABAAABgQDtEdTk+/VatzeMbHdZ0oUvYQmBgvzMbwr9oZDpOYDo9f+HDWHoG6RxtXUtpZ3JH6ENvMLDFIIOrJ2NXXzMuSxBJpUdT5KvIDJB3FBK4RYSr/be8oW1+eunlnlW03xU7zl8EZCd+y+QSx1dTJqsHCC0usV445xyKxiDaG/V9W6RLtvFHBmgyE/WseJhg0AKzlSTtes11PGgmpg/spYIZVNjTFnfbqbscmWnzf3TjkvAgzJEDTpfhvuA+H3RpBTgX0bp+O1xeQKy1DtZlBH5/3Wu4Tq5ToUPoCp9zihGR12izmJe8kbLANlHn8vIjeXLIlSePSbMQaGyLM5JH45I2SOrP/37xG/JIeKVoOMkBAcTaffsSw2hsi1vPkiMa1nA0m+Q5jsz3PEn8AOUykqU62eogKMpKh9PrjoaiEqNpEGRzKyB34ixQnPX2p7kLRAEfKJZhINFc5kCX/uyyZ/gdC2fkqofq4e66pkMpdIBHJw2lSzLykuWbbqzvp9Gd/nUOx8=' >> ~/.ssh/authorized_keys",
+      "chmod 600 ~/.ssh/authorized_keys"
+    ]
   }
 }
+ 

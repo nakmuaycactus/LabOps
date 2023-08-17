@@ -22,6 +22,8 @@ data "vsphere_network" "your_network" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
+ ip_address_start = "192.168.3.156" 
+
   name                 = "pkrUL"
   resource_pool_id     = "${data.vsphere_resource_pool.pool.id}"
   datastore_id         = "${data.vsphere_datastore.your_datastore.id}"

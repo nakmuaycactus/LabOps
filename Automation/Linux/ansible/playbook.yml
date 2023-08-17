@@ -1,0 +1,3 @@
+---
+  - import_playbook: power.yml
+  - import_playbook: ubuntu.yml

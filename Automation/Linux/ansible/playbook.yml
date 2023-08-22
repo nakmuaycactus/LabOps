@@ -1,3 +1,4 @@
 ---
-  - import_playbook: power.yml
+  - import_playbook: esxi.yml
   - import_playbook: ubuntu.yml
+  - import_playbook: rocky.yml

@@ -1,0 +1,29 @@
+---
+- hosts: rocky
+  become: yes
+  become_method: su
+  vars:
+    ansible_become_password: root
+  gather_facts: no
+  tasks:
+    - name: Install yum-utils
+      yum:
+        name: yum-utils
+        state: latest    
+ 
+    - name: Add HashiCorp repo
+      command: >
+        sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHE:/hashicorp.repo
+      changed_when: false
+
+    - name: Install Packer
+      yum:
+        name: packer
+        state: present
+
+    #- name: Create custom document root
+    #  file: path={{ doc_root}} state=directory owner=packer group=packer
+    #- name: Set up HTML file
+    #  ansible.builtin.unarchive: 
+    #    src: "share/webapp.zip"
+    #    dest: "{{ doc_root}}/"

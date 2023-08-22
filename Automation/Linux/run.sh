@@ -4,8 +4,10 @@
 cd packer
 packer build -force -var-file=UL-pkrvars.hcl template.pkr.hcl
 ssh-keygen -R 192.168.3.151
-#packer build -force -var-file=packer/RL-pkrvars.hcl packer/template.pkr.hcl
-#packer build -force -var-file=packer/KL-pkrvars.hcl packer/template.pkr.hcl
+packer build -force -var-file=RL-pkrvars.hcl template.pkr.hcl
+ssh-keygen -R 192.168.3.152
+#packer build -force -var-file=KL-pkrvars.hcl template.pkr.hcl
+#ssh-keygen -R 192.168.3.153
 
 #Terraform
 #terraform init terraform-main.tf

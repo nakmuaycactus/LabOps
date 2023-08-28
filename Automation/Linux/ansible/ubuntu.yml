@@ -9,8 +9,9 @@
     - name: Update apt
       vars: 
         ansible_python_interpreter: /usr/bin/python3
-      apt: update_cache=yes        
-    
+      apt: update_cache=yes  
+      
+#Install/Update software/packages    
     - name: Install required apache and mysql packages
       vars: 
         ansible_python_interpreter: /usr/bin/python3
@@ -29,11 +30,17 @@
           - unzip
         state: latest
         update_cache: true
-
     - name: Install MySQL-python
       pip: name=MySQL-python  state=present
 
-    - name: Create custom document root
+#Setup syslog logging
+    - name: Set up rsyslog conf file
+      copy: src=share/02-apache2.conf dest=/etc/rsyslog.d/
+      notify:
+      - restart rsyslog
+
+#Launch LAMP-app
+    - name: Create Apache-app root
       file: path={{ doc_root}} state=directory owner=packer group=packer
     - name: Set up HTML file
       ansible.builtin.unarchive: 
@@ -41,7 +48,6 @@
         dest: "{{ doc_root}}/"
       notify:
       - restart apache    
-
     - name: start up the mysql service
       shell: "service mysql start"
     - name: ensure mysql is enabled to run on startup
@@ -65,9 +71,12 @@
       copy: src=share/shoppingcart.sql dest=/tmp/shoppingcart.sql
     - name: insert data into databse
       mysql_db: name=shoppingcart state=import target=/tmp/shoppingcart.sql login_user=root login_password=packer    
+      ignore_errors: true
       notify:
       - restart apache
 
   handlers:
+    - name: restart rsyslog
+      service: name=rsyslog state=restarted
     - name: restart apache
       service: name=apache2 state=restarted

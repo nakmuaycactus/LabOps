@@ -3,11 +3,11 @@
   hosts: localhost
   vars:
     # temp_address: 172.16.108.144
-    dc_address: 192.168.3.155
+    dc_address: 192.168.3.154
     dc_netmask_cidr: 24
     dc_gateway: 192.168.3.1
     dc_hostname: 'ans_dc'
-    domain_name: "swag.org"
+    domain_name: "sgv.org"
     local_admin: '.\Administrator'
     temp_password: 'Changeme!'
     dc_password: 'Pa$$w0rd123'

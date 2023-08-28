@@ -2,12 +2,13 @@
 
 #Packer
 cd packer
+packer init template.pkr.hcl
 packer build -force -var-file=UL-pkrvars.hcl template.pkr.hcl
 ssh-keygen -R 192.168.3.151
 packer build -force -var-file=RL-pkrvars.hcl template.pkr.hcl
 ssh-keygen -R 192.168.3.152
-#packer build -force -var-file=KL-pkrvars.hcl template.pkr.hcl
-#ssh-keygen -R 192.168.3.153
+packer build -force -var-file=KL-pkrvars.hcl template.pkr.hcl
+ssh-keygen -R 192.168.3.153
 
 #Terraform
 #terraform init terraform-main.tf
@@ -16,4 +17,6 @@ ssh-keygen -R 192.168.3.152
 
 #Ansible
 cd ../ansible
-ansible-playbook -i=hosts playbook.yml
+ansible-playbook -i=hosts esxi.yml
+ansible-playbook -i=hosts ubuntu.yml
+ansible-playbook -i=hosts rocky.yml

@@ -1,0 +1,9 @@
+[win]
+192.168.3.154 ansible_ssh_pass='packer' ansible_ssh_user='packer'
+  
+[win:vars]
+ansible_user=ansible@sgv.org
+ansible_password=ansible
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_transport=ntlm

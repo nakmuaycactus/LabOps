@@ -5,14 +5,14 @@
     doc_root: /var/www/html
     ansible_become_password: packer
   gather_facts: no
+
+#Install/update software/packages
   tasks:
     - name: Update apt
       vars: 
         ansible_python_interpreter: /usr/bin/python3
       apt: update_cache=yes  
-      
-#Install/Update software/packages    
-    - name: Install required apache and mysql packages
+    - name: Install required software/ packages
       vars: 
         ansible_python_interpreter: /usr/bin/python3
       apt:
@@ -28,6 +28,8 @@
           - libmysqlclient-dev
           - mysql-server
           - unzip
+          - auditd
+          - audispd-plugins
         state: latest
         update_cache: true
     - name: Install MySQL-python
@@ -36,8 +38,39 @@
 #Setup syslog logging
     - name: Set up rsyslog conf file
       copy: src=share/02-apache2.conf dest=/etc/rsyslog.d/
-      notify:
-      - restart rsyslog
+    - name: Restart rsyslog
+      service: 
+        name: rsyslog
+        state: restarted
+
+#Setup auditd logging
+    #Delete existing auditd rule files
+    - name: Delete existing auditd rules file
+      file:
+        dest: /etc/audit/audit.rules
+        state: absent
+    - name: Delete existing auditd rules file
+      file:
+        dest: /etc/audit/audit.rules
+        state: absent
+    #Import rule files
+    - name: Set up auditd rules file
+      copy: src=share/audit.rules dest=/etc/audit/
+    - name: Set up auditd rules file
+      copy: src=share/audit.rules dest=/etc/audit/rules.d
+    - name: Set up auditd config file
+      copy: src=share/40-audispd.conf dest=/etc/rsyslog.d/
+    - name: Configure auditd to syslog
+      command: >
+        sudo sed -i 's/^active.*/active = yes/g' /etc/audisp/plugins.d/syslog.conf
+    - name: Restart auditd
+      service: 
+        name: auditd
+        state: restarted
+    - name: Restart rsyslog
+      service:
+        name: rsyslog
+        state: restarted
 
 #Launch LAMP-app
     - name: Create Apache-app root
@@ -45,15 +78,13 @@
     - name: Set up HTML file
       ansible.builtin.unarchive: 
         src: "share/webapp.zip"
-        dest: "{{ doc_root}}/"
-      notify:
-      - restart apache    
-    - name: start up the mysql service
+        dest: "{{ doc_root}}/"   
+    - name: Start up the mysql service
       shell: "service mysql start"
-    - name: ensure mysql is enabled to run on startup
+    - name: Ensure mysql is enabled to run on startup
       service: name=mysql state=started enabled=true     
     #login_password is '' on first script run, packer on subsequent
-    - name: update mysql root password for all root accounts
+    - name: Update mysql root password for all root accounts
       mysql_user:
         login_user: root
         login_password: packer
@@ -63,20 +94,14 @@
         check_implicit_admin: yes
         priv: '*.*:ALL,GRANT'
         login_unix_socket: /var/run/mysqld/mysqld.sock
-      notify:
-      - restart apache
-    - name: create a new database
+    - name: Create a new database
       mysql_db: name=shoppingcart state=present login_user=root login_password=packer 
-    - name: create database
+    - name: Create database
       copy: src=share/shoppingcart.sql dest=/tmp/shoppingcart.sql
-    - name: insert data into databse
+    - name: Insert data into databse
       mysql_db: name=shoppingcart state=import target=/tmp/shoppingcart.sql login_user=root login_password=packer    
       ignore_errors: true
-      notify:
-      - restart apache
-
-  handlers:
-    - name: restart rsyslog
-      service: name=rsyslog state=restarted
-    - name: restart apache
-      service: name=apache2 state=restarted
+    - name: Restart apache
+      service: 
+        name: apache2
+        state: restarted

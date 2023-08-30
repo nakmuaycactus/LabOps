@@ -23,7 +23,6 @@
     - name: Set default gateway
       community.general.nmcli:
         conn_name: ens192
-#        ifname: eth0
         type: ethernet
         ip4: 192.168.3.152/24
         gw4: 192.168.3.1
@@ -31,11 +30,7 @@
  
     - name: Apply Network Changes
       reboot:
-#        test_command: ping -c 192.168.3.192
         reboot_timeout: 60
-
-      #command: >
-        #3nmcli con down ens192; nmcli con up ens192
 
     - name: Install yum-utils
       yum:

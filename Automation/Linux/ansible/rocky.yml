@@ -3,7 +3,7 @@
   become: yes
   become_method: su
   vars:
-    doc_root: /home/packer/automation
+    doc_root: /home/packer
     ansible_become_password: root
     network_connections:
        - name: ens192
@@ -28,6 +28,14 @@
         ip4: 192.168.3.152/24
         gw4: 192.168.3.1
         state: present
+ 
+    - name: Apply Network Changes
+      reboot:
+#        test_command: ping -c 192.168.3.192
+        reboot_timeout: 60
+
+      #command: >
+        #3nmcli con down ens192; nmcli con up ens192
 
     - name: Install yum-utils
       yum:
@@ -56,5 +64,5 @@
       file: path={{ doc_root }} state=directory owner=packer group=packer
     - name: Set up automation files
       ansible.builtin.unarchive: 
-        src: "share/P-T-A.zip"
+        src: "share/automation.zip"
         dest: "{{ doc_root }}/"

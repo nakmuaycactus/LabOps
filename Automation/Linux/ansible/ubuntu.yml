@@ -33,9 +33,9 @@
           - vim
           - tmux
           - curl
-          - dkms #falco dependency
-          - make #falco
-          - linux-headers-$(uname -r) #falco
+          # falco
+          - dkms
+          - make
         state: latest
         update_cache: true
     - name: Install MySQL-python
@@ -43,10 +43,10 @@
 
 #Falco logging
     - name: Set up falco logging
-      command: > 
-        curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg ;\
-        echo “deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main” | tee /etc/apt/sources.list.d/falcosecurity.list ;\
-        apt update -y ;\
+      command: |
+        curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
+        echo “deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main” | tee /etc/apt/sources.list.d/falcosecurity.list
+        apt update -y
         apt install -qqy falco
 
 #Setup syslog logging

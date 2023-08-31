@@ -12,7 +12,7 @@
       vars: 
         ansible_python_interpreter: /usr/bin/python3
       apt: update_cache=yes  
-    - name: Install required software/ packages
+    - name: Install required software/packages
       vars: 
         ansible_python_interpreter: /usr/bin/python3
       apt:
@@ -30,10 +30,24 @@
           - unzip
           - auditd
           - audispd-plugins
+          - vim
+          - tmux
+          - curl
+          - dkms #falco dependency
+          - make #falco
+          - linux-headers-$(uname -r) #falco
         state: latest
         update_cache: true
     - name: Install MySQL-python
       pip: name=MySQL-python  state=present
+
+#Falco logging
+    - name: Set up falco logging
+      command: > 
+        curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg ;\
+        echo “deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main” | tee /etc/apt/sources.list.d/falcosecurity.list ;\
+        apt update -y ;\
+        apt install -qqy falco
 
 #Setup syslog logging
     - name: Set up rsyslog conf file

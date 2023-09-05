@@ -1,26 +1,28 @@
 #!/bin/bash
 
+#Build VMs
 #Linux
-cd Linux
-#Packer
-cd packer
+cd packer/linux
 packer init template.pkr.hcl
 packer build -force -var-file=UL-pkrvars.hcl template.pkr.hcl
 ssh-keygen -R 192.168.3.151
 packer build -force -var-file=RL-pkrvars.hcl template.pkr.hcl
 ssh-keygen -R 192.168.3.152
-packer build -force -var-file=KL-pkrvars.hcl template.pkr.hcl
-ssh-keygen -R 192.168.3.153
+#packer build -force -var-file=KL-pkrvars.hcl template.pkr.hcl
+#ssh-keygen -R 192.168.3.153
 
-#Terraform
-# cd../terraform
-#terraform init terraform-main.tf
-#terraform plan terraform-main.tf
-#terraform build terraform-main.tf
+#Windows
+#cd ../windows
+#packer init template.pkr.hcl
+#packer build -force -var-file=ser-22.pkrvars.hcl template.pkr.hcl
+#ssh-keygen -R 192.168.3.154
+#packer build -force -var-file=win-10.pkrvars.hcl template.pkr.hcl
+#ssh-keygen -R 192.168.3.155
+#packer build -force -var-file=ser-16.pkrvars.hcl template.pkr.hcl
+#ssh-keygen -R 192.168.3.156
 
-#Ansible
-cd ../ansible
+#Setup VMs
+cd ../../ansible
 ansible-playbook -i=hosts esxi.yml
 ansible-playbook -i=hosts ubuntu.yml
 ansible-playbook -i=hosts rocky.yml
-../../

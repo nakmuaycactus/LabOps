@@ -44,7 +44,7 @@
 #Falco logging
     - name: Set up falco logging
       command: |
-        curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
+        curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | sudo gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
         echo “deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main” | tee /etc/apt/sources.list.d/falcosecurity.list
         apt update -y
         apt install -qqy falco

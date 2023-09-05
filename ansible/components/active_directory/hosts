@@ -1,0 +1,9 @@
+[win]
+192.168.3.154
+
+[win:vars]
+ansible_user=packer
+ansible_password=packer
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_transport=ntlm

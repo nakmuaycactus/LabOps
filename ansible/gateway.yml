@@ -1,0 +1,12 @@
+---
+- name: Set default gateway
+  community.general.nmcli:
+    conn_name: ens192
+    type: ethernet
+    ip4: 192.168.3.152/24
+    gw4: 192.168.3.1
+    state: present
+
+- name: Apply Network Changes
+  reboot:
+    reboot_timeout: 60

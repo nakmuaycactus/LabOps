@@ -1,0 +1,10 @@
+---
+- hosts: rocky
+  become: yes
+  vars:
+    ansible_become_password: root
+  become_method: su
+
+  tasks:
+    - include_tasks: gateway.yml
+    - include_tasks: automation.yml

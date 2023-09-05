@@ -1,0 +1,63 @@
+---
+#Install/update software/packages
+- name: Update apt
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    become_password: packer    
+  apt: update_cache=yes  
+- name: Install required software/ packages
+  vars:
+    ansible_python_interpreter: /usr/bin/python3    
+  apt:
+    pkg:
+      - auditd
+      - unzip
+      - audispd-plugins
+      - vim
+      - tmux
+      - curl
+      - dkms #falco dependency
+      - make #falco
+    state: latest
+    update_cache: true
+
+#Rsyslog
+- name: Set up apache conf file
+  copy: src=components/logging/02-apache2.conf dest=/etc/rsyslog.d/
+- name: Set up auditd config file
+  copy: src=components/logging/40-audispd.conf dest=/etc/rsyslog.d/
+- name: Restart rsyslog
+  vars:
+    ansible_python_interpreter: /usr/bin/python3    
+  service: 
+    name: rsyslog
+    state: restarted
+
+#Auditd
+- name: Set up auditd rules file
+  copy: src=components/logging/audit.rules dest=/etc/audit/
+- name: Set up auditd rules file
+  copy: src=components/logging/audit.rules dest=/etc/audit/rules.d
+- name: Configure auditd to syslog
+  command: >
+    sudo sed -i 's/^active.*/active = yes/g' /etc/audisp/plugins.d/syslog.conf
+- name: Restart auditd
+  service: 
+    name: auditd
+    state: restarted
+
+#Auditbeat
+
+#Falco
+- name: Set up falco logging
+  vars:
+    ansible_python_interpreter: /usr/bin/python3    
+  shell: | 
+    curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | sudo gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main' | sudo tee /etc/apt/sources.list.d/falcosecurity.list
+    sudo apt update -y 
+    sudo apt install -qqy falco
+- name: Restart falco
+  service: 
+    name: falco
+    state: restarted

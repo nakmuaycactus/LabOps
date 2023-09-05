@@ -1,0 +1,10 @@
+---
+- hosts: ubuntu
+  become: yes
+  vars:
+    ansible_become_password: packer
+  gather_facts: no
+
+  tasks:
+    - include_tasks: apache.yml
+    - include_tasks: logging.yml

@@ -1,0 +1,62 @@
+---
+#Install/update software/packages
+- name: Update apt
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  apt: update_cache=yes
+- name: Install required software/ packages
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  apt:
+    pkg:
+      - unzip
+      - python-minimal
+      - python-pip
+      - apache2
+      - php
+      - libapache2-mod-php
+      - php-mcrypt
+      - php7.0-mysql
+      - python-dev
+      - libmysqlclient-dev
+      - mysql-server
+    state: latest
+    update_cache: true
+- name: Install MySQL-python
+  pip: name=MySQL-python state=present
+
+#Launch LAMP-app
+#PHP
+- name: Create Apache-app root
+  file: path=/var/www/html state=directory owner=packer group=packer
+- name: Set up HTML file
+  ansible.builtin.unarchive:
+    src: "components/apache/webapp.zip"
+    dest: "/var/www/html/"
+#MySQL    
+- name: Start up the mysql service
+  shell: "service mysql start"
+- name: Ensure mysql is enabled to run on startup
+  service: name=mysql state=started enabled=true
+#login_password is '' on first script run, packer on subsequent
+- name: Update mysql root password for all root accounts
+  mysql_user:
+    login_user: root
+    login_password: packer
+    login_host: localhost
+    name: root
+    password: packer
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+- name: Create a new database
+  mysql_db: name=shoppingcart state=present login_user=root login_password=packer
+- name: Create database
+  copy: src=components/apache/shoppingcart.sql dest=/tmp/shoppingcart.sql
+- name: Insert data into databse
+  mysql_db: name=shoppingcart state=import target=/tmp/shoppingcart.sql login_user=root login_password=packer
+  ignore_errors: true
+- name: Restart apache
+  service:
+    name: apache2
+    state: restarted

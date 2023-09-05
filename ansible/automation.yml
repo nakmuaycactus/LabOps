@@ -1,0 +1,35 @@
+---
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Install unzip
+  yum:
+    name: unzip
+    state: latest
+
+- name: Add HashiCorp repo
+  command: >
+    sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+  changed_when: false
+
+- name: Install Packer
+  yum:
+    name:
+      - packer
+      - terraform
+      - epel-release
+    state: present
+
+- name: Install Terraform
+  yum:
+    name: ansible
+    state: present
+
+- name: Create custom document root
+  file: path=/home/packer state=directory owner=packer group=packer
+- name: Set up automation files
+  ansible.builtin.unarchive:
+    src: "components/automation/automation.zip"
+    dest: "/home/packer/"

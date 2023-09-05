@@ -50,17 +50,21 @@
         apt install -qqy falco
 
 #Setup syslog logging
-    - name: Set up rsyslog conf file
+    - name: Apache logging
       copy: src=share/02-apache2.conf dest=/etc/rsyslog.d/
+    - name: 
+      copy: src=share/03-auditbeat.conf dest=/etc/rsyslog.d/
+    - name: Preparing rsyslog.conf for Auditbeat (commenting out $PrivDrop*)
+      command: >
+        sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
     - name: Restart rsyslog
       service: 
         name: rsyslog
         state: restarted
 
-#Auditbeat logging
-    - name: Preparing rsyslog.conf for Auditbeat (commenting out $PrivDrop*)
-      command: >
-        sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
+#Setup Auditbeat
+    - name: Copy auditbeat.yml
+      copy: src=share/auditbeat.yml dest=/etc/auditbeat/
 
 #Setup auditd logging
     #Delete existing auditd rule files

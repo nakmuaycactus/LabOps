@@ -57,6 +57,11 @@
         name: rsyslog
         state: restarted
 
+#Auditbeat logging
+    - name: Preparing rsyslog.conf for Auditbeat (commenting out $PrivDrop*)
+      command: >
+        sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
+
 #Setup auditd logging
     #Delete existing auditd rule files
     - name: Delete existing auditd rules file

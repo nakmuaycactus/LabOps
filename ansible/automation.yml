@@ -14,7 +14,7 @@
     sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
   changed_when: false
 
-- name: Install Packer
+- name: Install Packer/Terraform
   yum:
     name:
       - packer
@@ -22,7 +22,7 @@
       - epel-release
     state: present
 
-- name: Install Terraform
+- name: Install Ansible
   yum:
     name: ansible
     state: present

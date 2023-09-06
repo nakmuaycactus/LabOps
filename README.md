@@ -28,26 +28,19 @@ Clone this repository to your local machine:
 
     git clone https://github.com/nakmuaycactus/autoAD.git
 
-Install the required dependencies: Packer, Ansible, and Terraform on your local system and ensure that ESXi is properly configured.
+Install the required dependencies on your local system and ensure that ESXi is properly configured.
 
-Ensure you have the necessary ISO files for Ubuntu, Kali Linux, Rocky Linux, Windows 10, Windows Server 2016, and Windows Server 2022.
+    Packer  - https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
+    Ansible - https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+    
+Ensure you have the necessary ISO files:
 
-## VM Configuration
-### Ubuntu
-
-Ansible is used to deploy an intentionally vulnerable web application (LAMP stack) with CRUD functionality and a shopping cart. Vulnerabilities include SQL injection, brute force login attempts, and web shell upload.
-
-### Rocky Linux
-
-Ansible sets up the environment by installing Packer, Terraform, and Ansible itself for recursive provisioning.
-
-### Windows Server 2022
-
-This VM is configured as a Domain Controller (DC) and is linked to two instances of Windows 10 VMs.
-
-### Windows Server 2016
-
-Windows Server 2016 is not domain-joined but has Odoo installed for Windows-based database attack simulations.
+    Windows 10      - https://www.microsoft.com/en-au/software-download/windows10ISO
+    Win Server 2022 - https://info.microsoft.com/ww-landing-windows-server-2022.html
+    Win Server 2016 - https://info.microsoft.com/ww-landing-windows-server-2016.html
+    Ubuntu Linux    - https://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso
+    Rocky Linux     - https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso 
+    Kali Linux      - https://www.kali.org/get-kali/#kali-platforms
 
 ## Lab Purpose
 
@@ -58,11 +51,27 @@ The primary purpose of this lab environment is to create a controlled, isolated 
     Evaluate and fine-tune security tools and configurations.
     Gain hands-on experience with log management and monitoring using LogRhythm.
 
-## Log Management
+## Lab Contents
+### Rocky Linux
+Configured to have Packer, Terraform, and Ansible itself for recursive provisioning.
+
+### Ubuntu
+Configured to include an intentionally vulnerable (LAMP stack) shopping cart web application with CRUD functionality. Vulnerabilities include SQL injections, brute forceable login page, and web shell uploads.
+
+### Windows Server 2022
+
+This VM is configured as a Domain Controller (DC) and is linked to two instances of Windows 10 VMs.
+
+### Windows Server 2016
+
+Windows Server 2016 is not domain-joined but has Odoo installed for Windows-based database attack simulations.
+
+### Logrhythm
 
 LogRhythm is installed on a dedicated VM within the environment. It collects logs from various sources, including auditd, Auditbeats, Apache logs, and syslog from other VMs. This allows for real-time monitoring and analysis of security events and incidents.
 Deployment
 
+##End
 Please refer to the project's documentation and deployment scripts for detailed instructions on how to provision and configure the VMs in your homelab environment.
 
 Feel free to contribute, report issues, or provide feedback to help improve this cybersecurity internship project. Happy hacking and learning!

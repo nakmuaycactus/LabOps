@@ -26,7 +26,7 @@ To get started, follow these steps to set up your environment:
 
 Clone this repository to your local machine:
 
-    git clone https://github.com/yourusername/cybersecurity-internship-project.git
+    git clone https://github.com/nakmuaycactus/autoAD.git
 
 Install the required dependencies: Packer, Ansible, and Terraform on your local system and ensure that ESXi is properly configured.
 

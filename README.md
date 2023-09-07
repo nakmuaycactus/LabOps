@@ -44,7 +44,7 @@ Ensure you have the necessary ISO files:
 
 ## Lab Purpose
 
-The primary purpose of this lab environment is to create a controlled, isolated environment where cybersecurity interns and professionals can:
+The primary purpose of this lab environment is to create a controlled, repeatable, isolated environment where users can:
 
     Test and analyze malware behavior and attack techniques.
     Develop and practice cybersecurity skills in a safe environment.
@@ -53,10 +53,13 @@ The primary purpose of this lab environment is to create a controlled, isolated 
 
 ## Lab Contents
 ### Rocky Linux
-Configured to have Packer, Terraform, and Ansible itself for recursive provisioning.
+
+Configured to have Packer, Terraform, and Ansible for recursive provisioning - it acts as the control node for the lab.
 
 ### Ubuntu
+
 Configured to include an intentionally vulnerable (LAMP stack) shopping cart web application with CRUD functionality. Vulnerabilities include SQL injections, brute forceable login page, and web shell uploads.
+Additionally, its used to experiment with different logging types and technology, including auditd (by means of Auditbeat), Falco, and apache logs.
 
 ### Windows Server 2022
 
@@ -68,11 +71,4 @@ Windows Server 2016 is not domain-joined but has Odoo installed for Windows-base
 
 ### LogRhythm
 
-LogRhythm is installed on a dedicated VM within the environment. It collects logs from various sources, including auditd, Auditbeats, Apache logs, and syslog from other VMs. This allows for real-time monitoring and analysis of security events and incidents.
-Deployment
-
-## End
-
-Please refer to the project's documentation and deployment scripts for detailed instructions on how to provision and configure the VMs in your homelab environment.
-
-Feel free to contribute, report issues, or provide feedback to help improve this cybersecurity internship project. Happy hacking and learning!
+LogRhythm is installed on a dedicated VM within the environment. It collects and processes logs from the Ubuntu machine and Windows domain, allowing for real-time monitoring and analysis of security events and incidents.

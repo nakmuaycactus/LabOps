@@ -15,8 +15,8 @@
       - audispd-plugins
       - vim
       - tmux
-      - curl
-      - dkms #falco dependency
+      - curl #falco
+      - dkms #falco
       - make #falco
     state: latest
     update_cache: true
@@ -80,8 +80,8 @@
     echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y
     sudo FALCO_FRONTEND=noninteractive apt install -y falco
-    falco-driver-loader --compile module
-    systemctl enable falco
-    systemctl start falco
+    sudo falco-driver-loader --compile module
+    sudo systemctl --system enable falco-kmod.service
+    sudo systemctl start falco
 
 

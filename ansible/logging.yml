@@ -79,16 +79,9 @@
   shell: |
     echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y
-    sudo apt-get install -y falco
+    sudo FALCO_FRONTEND=noninteractive apt install -y falco
+    falco-driver-loader --compile module
+    systemctl enable falco
+    systemctl start falco
 
-#- name: Set up falco logging
-#  shell: |
-#    curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | sudo gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
-#    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
-#    sudo apt update -y
-#    sudo apt install -qqy falco
 
-- name: Restart falco
-  service: 
-    name: falco
-    state: restarted

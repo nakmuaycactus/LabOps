@@ -69,7 +69,6 @@
     name: rsyslog
     state: restarted
 
-
 #Falco logging
 - name: Add falco keyring
   apt_key:

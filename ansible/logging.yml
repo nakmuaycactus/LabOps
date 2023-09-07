@@ -71,11 +71,11 @@
 
 
 #Falco logging
-- name: Set up falco logging
+- name: Add falco keyring
   apt_key:
     url: https://falco.org/repo/falcosecurity-packages.asc
     keyring: /usr/share/keyrings/falco-archive-keyring.gpg
-- name: a
+- name: Set up falco logging
   shell: |
     echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y
@@ -83,5 +83,3 @@
     sudo falco-driver-loader --compile module
     sudo systemctl --system enable falco-kmod.service
     sudo systemctl start falco
-
-

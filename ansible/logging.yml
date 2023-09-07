@@ -21,18 +21,6 @@
     state: latest
     update_cache: true
 
-#Rsyslog
-- name: Set up apache conf file
-  copy: src=components/logging/02-apache2.conf dest=/etc/rsyslog.d/
-- name: Set up auditd config file
-  copy: src=components/logging/40-audispd.conf dest=/etc/rsyslog.d/
-- name: Restart rsyslog
-  vars:
-    ansible_python_interpreter: /usr/bin/python3    
-  service: 
-    name: rsyslog
-    state: restarted
-
 #Auditd
 - name: Set up auditd rules file
   copy: src=components/logging/audit.rules dest=/etc/audit/
@@ -45,21 +33,61 @@
   service: 
     name: auditd
     state: restarted
+- name: Stop auditd
+  service: 
+    name: auditd
+    state: stopped
 
 #Auditbeat
+- name: Install auditbeat
+  shell: |
+    curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-8.9.2-amd64.deb;
+    sudo dpkg -i auditbeat-8.9.2-amd64.deb
+- name: Set up auditbeat rules file
+  copy: src=components/logging/auditbeatrules.conf dest=/etc/auditbeat/audit.rules.d
+- name: Set up auditbeat config file
+  copy: src=components/logging/auditbeat.yml dest=/etc/auditbeat/
+- name: Restart auditbeat
+  service: 
+    name: auditbeat
+    state: restarted
 
-  
+#Rsyslog
+- name: Set up apache conf file
+  copy: src=components/logging/02-apache2.conf dest=/etc/rsyslog.d/
+- name: Set up auditd config file
+  copy: src=components/logging/03-audispd.conf dest=/etc/rsyslog.d/
+- name: Set up auditd config file
+  copy: src=components/logging/04-auditbeat.conf dest=/etc/rsyslog.d/
+- name: Configure syslog for auditbeat
+  command: >
+    sudo sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
+- name: Restart rsyslog
+  vars:
+    ansible_python_interpreter: /usr/bin/python3    
+  service: 
+    name: rsyslog
+    state: restarted
+
 
 #Falco logging
 - name: Set up falco logging
-#  vars:
-#    ansible_python_interpreter: /usr/bin/python3  
-  command: |
-    curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | sudo gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
-    echo “deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main” | sudo tee /etc/apt/sources.list.d/falcosecurity.list
+  apt_key:
+    url: https://falco.org/repo/falcosecurity-packages.asc
+    keyring: /usr/share/keyrings/falco-archive-keyring.gpg
+- name: a
+  shell: |
+    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y
-    sudo apt install -qqy falco
-    
+    sudo apt-get install -y falco
+
+#- name: Set up falco logging
+#  shell: |
+#    curl -fsSLk https://falco.org/repo/falcosecurity-packages.asc | sudo gpg --dearmor -o /usr/share/keyrings/falco-archive-keyring.gpg
+#    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
+#    sudo apt update -y
+#    sudo apt install -qqy falco
+
 - name: Restart falco
   service: 
     name: falco

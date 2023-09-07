@@ -16,7 +16,7 @@
       - vim
       - tmux
       - curl #falco
-      - dkms #falco
+      - dkms #falco 
       - make #falco
     state: latest
     update_cache: true
@@ -29,10 +29,6 @@
 - name: Configure auditd to syslog
   command: >
     sudo sed -i 's/^active.*/active = yes/g' /etc/audisp/plugins.d/syslog.conf
-- name: Restart auditd
-  service: 
-    name: auditd
-    state: restarted
 - name: Stop auditd
   service: 
     name: auditd
@@ -53,12 +49,8 @@
     state: restarted
 
 #Rsyslog
-- name: Set up apache conf file
-  copy: src=components/logging/02-apache2.conf dest=/etc/rsyslog.d/
-- name: Set up auditd config file
-  copy: src=components/logging/03-audispd.conf dest=/etc/rsyslog.d/
-- name: Set up auditd config file
-  copy: src=components/logging/04-auditbeat.conf dest=/etc/rsyslog.d/
+- name: Set up rsyslog conf file
+  copy: src=components/logging/02-all.conf dest=/etc/rsyslog.d/
 - name: Configure syslog for auditbeat
   command: >
     sudo sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
@@ -69,12 +61,13 @@
     name: rsyslog
     state: restarted
 
+
 #Falco logging
-- name: Add falco keyring
+- name: Set up falco logging
   apt_key:
     url: https://falco.org/repo/falcosecurity-packages.asc
     keyring: /usr/share/keyrings/falco-archive-keyring.gpg
-- name: Set up falco logging
+- name: a
   shell: |
     echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y

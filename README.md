@@ -71,7 +71,8 @@ Windows Server 2016 is not domain-joined but has Odoo installed for Windows-base
 LogRhythm is installed on a dedicated VM within the environment. It collects logs from various sources, including auditd, Auditbeats, Apache logs, and syslog from other VMs. This allows for real-time monitoring and analysis of security events and incidents.
 Deployment
 
-##End
+## End
+
 Please refer to the project's documentation and deployment scripts for detailed instructions on how to provision and configure the VMs in your homelab environment.
 
 Feel free to contribute, report issues, or provide feedback to help improve this cybersecurity internship project. Happy hacking and learning!

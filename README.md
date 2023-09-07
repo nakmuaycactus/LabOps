@@ -66,7 +66,7 @@ This VM is configured as a Domain Controller (DC) and is linked to two instances
 
 Windows Server 2016 is not domain-joined but has Odoo installed for Windows-based database attack simulations.
 
-### Logrhythm
+### LogRhythm
 
 LogRhythm is installed on a dedicated VM within the environment. It collects logs from various sources, including auditd, Auditbeats, Apache logs, and syslog from other VMs. This allows for real-time monitoring and analysis of security events and incidents.
 Deployment

@@ -1,0 +1,37 @@
+auditbeat.modules:
+
+- module: auditd
+  audit_rule_files: [ '${path.config}/audit.rules.d/*.conf' ]
+
+- module: file_integrity
+  paths:
+  - /bin
+  - /usr/bin
+  - /sbin
+  - /usr/sbin
+  - /etc
+
+- module: system
+  datasets:
+    - package
+  period: 2m
+
+- module: system
+  datasets:
+    - host
+    - login
+    - process
+    - socket
+    - user
+  state.period: 12h
+
+  user.detect_password_changes: true
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+output.file:
+  path: "tmp/auditbeat"
+  filename: auditbeat
+
+logging.to_syslog: true

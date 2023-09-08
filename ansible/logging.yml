@@ -46,7 +46,25 @@
 - name: Restart auditbeat
   service: 
     name: auditbeat
-    state: restarted
+    state: stopped
+
+#Falco logging
+- name: Add falco key
+  apt_key:
+    url: https://falco.org/repo/falcosecurity-packages.asc
+    keyring: /usr/share/keyrings/falco-archive-keyring.gpg
+- name: Install falco
+  shell: |
+    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
+    sudo apt update -y
+    sudo FALCO_FRONTEND=noninteractive apt install -y falco
+    sudo falco-driver-loader --compile module
+    sudo systemctl --system enable falco-kmod.service
+    sudo systemctl start falco
+- name: Output falco to file
+  shell: |
+    sed -i.bak "325s|enabled: false|enabled: true|" /etc/falco/falco.yaml
+    sed -i.bak "327s|filename: ./events.txt|filename: /var/log/events.txt|" /etc/falco/falco.yaml 
 
 #Rsyslog
 - name: Set up rsyslog conf file
@@ -60,18 +78,3 @@
   service: 
     name: rsyslog
     state: restarted
-
-
-#Falco logging
-- name: Set up falco logging
-  apt_key:
-    url: https://falco.org/repo/falcosecurity-packages.asc
-    keyring: /usr/share/keyrings/falco-archive-keyring.gpg
-- name: a
-  shell: |
-    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
-    sudo apt update -y
-    sudo FALCO_FRONTEND=noninteractive apt install -y falco
-    sudo falco-driver-loader --compile module
-    sudo systemctl --system enable falco-kmod.service
-    sudo systemctl start falco

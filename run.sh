@@ -23,6 +23,4 @@ ssh-keygen -R 192.168.3.152
 
 #Setup VMs
 cd ../../ansible
-ansible-playbook -i=hosts esxi.yml
-ansible-playbook -i=hosts ubuntu.yml
-ansible-playbook -i=hosts rocky.yml
+ansible-playbook -i=hosts esxi.yml ubuntu.yml rocky.yml

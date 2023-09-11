@@ -31,7 +31,7 @@ setup.template.settings:
   index.number_of_shards: 1
 
 output.file:
-  path: "/var/log/auditbeat"
+  path: "var/log/auditbeat"
   filename: auditbeat
 
 logging.to_syslog: true

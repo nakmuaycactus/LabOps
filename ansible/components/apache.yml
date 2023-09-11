@@ -31,7 +31,7 @@
   file: path=/var/www/html state=directory owner=packer group=packer
 - name: Set up HTML file
   ansible.builtin.unarchive:
-    src: "components/apache/webapp.zip"
+    src: "files/apache/webapp.zip"
     dest: "/var/www/html/"
 #MySQL    
 - name: Start up the mysql service
@@ -52,7 +52,7 @@
 - name: Create a new database
   mysql_db: name=shoppingcart state=present login_user=root login_password=packer
 - name: Create database
-  copy: src=components/apache/shoppingcart.sql dest=/tmp/shoppingcart.sql
+  copy: src=files/apache/shoppingcart.sql dest=/tmp/shoppingcart.sql
 - name: Insert data into databse
   mysql_db: name=shoppingcart state=import target=/tmp/shoppingcart.sql login_user=root login_password=packer
   ignore_errors: true

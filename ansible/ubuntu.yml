@@ -6,5 +6,5 @@
   gather_facts: no
 
   tasks:
-    - include_tasks: apache.yml
-    - include_tasks: logging.yml
+    - include_tasks: components/apache.yml
+    - include_tasks: components/logging.yml

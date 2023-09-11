@@ -6,5 +6,5 @@
   become_method: su
 
   tasks:
-    - include_tasks: gateway.yml
-    - include_tasks: automation.yml
+    - include_tasks: components/gateway.yml
+    - include_tasks: components/automation.yml

@@ -1,33 +1,23 @@
----
 - hosts: esxi
+  vars:
+    esxi_credentials:
+      hostname: 192.168.3.150
+      username: root
+      password: Thrunters1!FTW
+      validate_certs: no
+    vms_to_power_on:
+      - name: pkrUL
+      - name: pkrRL
+      - name: pkrKL
+      
   tasks:
-  - name: Power on VM
-    vmware_guest_powerstate:
-      hostname: 192.168.3.150
-      username: root
-      password: Thrunters1!FTW
-      validate_certs: no
-      name: pkrUL
-      state: powered-on
-    delegate_to: localhost
-    register: deploy
-  - name: Power on VM
-    vmware_guest_powerstate:
-      hostname: 192.168.3.150
-      username: root
-      password: Thrunters1!FTW
-      validate_certs: no
-      name: pkrRL
-      state: powered-on
-    delegate_to: localhost
-    register: deploy
-  - name: Power on VM
-    vmware_guest_powerstate:
-      hostname: 192.168.3.150
-      username: root
-      password: Thrunters1!FTW
-      validate_certs: no
-      name: pkrKL
-      state: powered-on
-    delegate_to: localhost
-    register: deploy
+    - name: Power on VMs
+      vmware_guest_powerstate:
+        "{{ esxi_credentials }}"
+        name: "{{ item.name }}"
+        state: powered-on
+      delegate_to: localhost
+      register: deploy
+      loop: "{{ vms_to_power_on }}"
+      loop_control:
+        loop_var: item

@@ -55,7 +55,8 @@
     keyring: /usr/share/keyrings/falco-archive-keyring.gpg
 - name: Install falco
   shell: |
-    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" | sudo tee /etc/apt/sources.list.d/falcosecurity.list
+    echo "deb [signed-by=/usr/share/keyrings/falco-archive-keyring.gpg] https://download.falco.org/packages/deb stable main" \
+    | sudo tee /etc/apt/sources.list.d/falcosecurity.list
     sudo apt update -y
     sudo FALCO_FRONTEND=noninteractive apt install -y falco
     sudo falco-driver-loader --compile module

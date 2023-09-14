@@ -1,5 +1,5 @@
 ---
-#Install/update software/packages
+# Install/update software/packages
 - name: Update apt
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -25,20 +25,20 @@
 - name: Install MySQL-python
   pip: name=MySQL-python state=present
 
-#Launch LAMP-app
-#PHP
+# Launch LAMP-app
+# PHP
 - name: Create Apache-app root
   file: path=/var/www/html state=directory owner=packer group=packer
 - name: Set up HTML file
   ansible.builtin.unarchive:
     src: "files/apache/webapp.zip"
     dest: "/var/www/html/"
-#MySQL    
+# MySQL
 - name: Start up the mysql service
   shell: "service mysql start"
 - name: Ensure mysql is enabled to run on startup
   service: name=mysql state=started enabled=true
-#login_password is '' on first script run, packer on subsequent
+# login_password is '' on first script run, packer on subsequent
 - name: Update mysql root password for all root accounts
   mysql_user:
     login_user: root
@@ -46,7 +46,7 @@
     login_host: localhost
     name: root
     password: packer
-    check_implicit_admin: yes
+    check_implicit_admin: true
     priv: "*.*:ALL,GRANT"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 - name: Create a new database

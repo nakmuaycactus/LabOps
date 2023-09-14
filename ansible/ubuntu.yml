@@ -3,7 +3,6 @@
   become: yes
   vars:
     ansible_become_password: packer
-  gather_facts: no
 
   tasks:
     - include_tasks: components/apache.yml

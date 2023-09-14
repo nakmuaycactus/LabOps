@@ -1,13 +1,13 @@
 ---
-#Install/update software/packages
+# Install/update software/packages
 - name: Update apt
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    become_password: packer    
-  apt: update_cache=yes  
+    become_password: packer
+  apt: update_cache=yes
 - name: Install required software/ packages
   vars:
-    ansible_python_interpreter: /usr/bin/python3    
+    ansible_python_interpreter: /usr/bin/python3
   apt:
     pkg:
       - auditd
@@ -15,13 +15,13 @@
       - audispd-plugins
       - vim
       - tmux
-      - curl #falco
-      - dkms #falco 
-      - make #falco
+      - curl # falco
+      - dkms # falco
+      - make # falco
     state: latest
     update_cache: true
 
-#Auditd
+# Auditd
 - name: Set up auditd rules file
   copy: src=files/logging/audit.rules dest=/etc/audit/
 - name: Set up auditd rules file
@@ -30,11 +30,11 @@
   command: >
     sudo sed -i 's/^active.*/active = yes/g' /etc/audisp/plugins.d/syslog.conf
 - name: Stop auditd
-  service: 
+  service:
     name: auditd
     state: stopped
 
-#Auditbeat
+# Auditbeat
 - name: Install auditbeat
   shell: |
     curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-8.9.2-amd64.deb;
@@ -44,11 +44,11 @@
 - name: Set up auditbeat config file
   copy: src=files/logging/auditbeat.yml dest=/etc/auditbeat/
 - name: Restart auditbeat
-  service: 
+  service:
     name: auditbeat
     state: restarted
 
-#Falco logging
+# Falco logging
 - name: Add falco key
   apt_key:
     url: https://falco.org/repo/falcosecurity-packages.asc
@@ -64,9 +64,9 @@
 - name: Output falco to file
   shell: |
     sed -i.bak "325s|enabled: false|enabled: true|" /etc/falco/falco.yaml
-    sed -i.bak "327s|filename: ./events.txt|filename: /var/log/events.txt|" /etc/falco/falco.yaml 
+    sed -i.bak "327s|filename: ./events.txt|filename: /var/log/events.txt|" /etc/falco/falco.yaml
 
-#Rsyslog
+# Rsyslog
 - name: Set up rsyslog conf file
   copy: src=files/logging/02-all.conf dest=/etc/rsyslog.d/
 - name: Configure syslog for auditbeat
@@ -74,7 +74,7 @@
     sudo sed -i '/^\$PrivDrop/s/^/#/' /etc/rsyslog.conf
 - name: Restart rsyslog
   vars:
-    ansible_python_interpreter: /usr/bin/python3    
-  service: 
+    ansible_python_interpreter: /usr/bin/python3
+  service:
     name: rsyslog
     state: restarted

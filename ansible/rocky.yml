@@ -2,8 +2,7 @@
 - hosts: rocky
   become: yes
   vars:
-    ansible_become_password: root
-  become_method: su
+    ansible_become_password: packer
 
   tasks:
     - include_tasks: components/gateway.yml

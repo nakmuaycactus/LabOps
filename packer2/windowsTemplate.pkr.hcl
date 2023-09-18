@@ -17,7 +17,7 @@ variable "network" {default="VM Network"}
 variable "network_card" {default="vmxnet3"}
 variable "vm_name" {default="New VM"}
 variable "guest_os_type" {}
-variable "iso_paths" {default=""}
+variable "iso_paths" {}
 variable "CPUs" {default=8}
 variable "RAM" {default=16384}
 variable "RAM_reserve_all" {default=true}

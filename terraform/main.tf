@@ -48,7 +48,7 @@ resource "vsphere_virtual_machine" "ubuntuVM" {
 
   ovf_deploy {
     allow_unverified_ssl_cert = true
-    local_ovf_path            = "../output/UL/packerUL.ovf"
+    local_ovf_path            = "../output/UL/alphaUL.ovf"
     disk_provisioning         = "thin"
     ip_protocol               = "IPV4"
     ip_allocation_policy      = "STATIC_MANUAL"
@@ -85,7 +85,7 @@ resource "vsphere_virtual_machine" "rockyVM" {
 
   ovf_deploy {
     allow_unverified_ssl_cert = true
-    local_ovf_path            = "../output/RL/packerRL.ovf"
+    local_ovf_path            = "../output/RL/alphaRL.ovf"
     disk_provisioning         = "thin"
     ip_protocol               = "IPV4"
     ip_allocation_policy      = "STATIC_MANUAL"
@@ -122,7 +122,7 @@ resource "vsphere_virtual_machine" "kaliVM" {
 
   ovf_deploy {
     allow_unverified_ssl_cert = true
-    local_ovf_path            = "../output/KL/packerKL.ovf"
+    local_ovf_path            = "../output/KL/KL.ovf"
     disk_provisioning         = "thin"
     ip_protocol               = "IPV4"
     ip_allocation_policy      = "STATIC_MANUAL"

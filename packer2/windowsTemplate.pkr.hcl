@@ -27,6 +27,7 @@ variable "disk_thin_provisioned" {default=true}
 variable "ssh_username" {default="packer"}
 variable "ssh_password" {default="packer"}
 variable "floppy_files" {default=null}
+variable "floppy_img_path" {default=null}
 variable "output_directory" {default="output/misc"}
 variable "boot_command" {}
 
@@ -41,6 +42,7 @@ source "vsphere-iso" "windows" {
   ssh_timeout          = "1h"
   ssh_clear_authorized_keys = "true"
   shutdown_timeout     = "15m"
+  shutdown_command     = ""
  
   datastore            = var.datastore
   disk_controller_type = var.disk_controller_type

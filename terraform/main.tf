@@ -16,11 +16,6 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-#data "vsphere_compute_cluster" "cluster" {
-#  name          = "cluster-01"
-#  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-#}
-
 data "vsphere_resource_pool" "pool" {
   name          = "Resources"
   datacenter_id = data.vsphere_datacenter.dc.id
@@ -36,8 +31,8 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-resource "vsphere_virtual_machine" "ubuntuVM" {
-  name             = "ubuntuVM"
+resource "vsphere_virtual_machine" "betaUL" {
+  name             = "betaUL"
   datacenter_id    = data.vsphere_datacenter.dc.id
   datastore_id     = data.vsphere_datastore.datastore.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -60,21 +55,21 @@ resource "vsphere_virtual_machine" "ubuntuVM" {
 
   vapp {
     properties = {
-      "guestinfo.hostname" = "ubuntuVM",
-      #"guestinfo.ipaddress"    = "192.168.3.152",
-      #"guestinfo.netmask"      = "255.255.255.0",
-      #"guestinfo.gateway"      = "192.168.3.1",
-      #"guestinfo.dns"          = "8.8.8.8",
-      "guestinfo.domain"   = "example.com",
-      "guestinfo.ntp"      = "ntp.example.com",
-      "guestinfo.password" = "Thrunters1!FTW",
-      "guestinfo.ssh"      = "True"
+      "guestinfo.hostname"  = "ubuntuVM",
+      "guestinfo.ipaddress" = "192.168.3.152",
+      "guestinfo.netmask"   = "255.255.255.0",
+      "guestinfo.gateway"   = "192.168.3.1",
+      "guestinfo.dns"       = "8.8.8.8",
+      "guestinfo.domain"    = "example.com",
+      "guestinfo.ntp"       = "ntp.example.com",
+      "guestinfo.password"  = "Thrunters1!FTW",
+      "guestinfo.ssh"       = "True"
     }
   }
 }
 
-resource "vsphere_virtual_machine" "rockyVM" {
-  name             = "rockyVM"
+resource "vsphere_virtual_machine" "betaRL" {
+  name             = "betaRL"
   datacenter_id    = data.vsphere_datacenter.dc.id
   datastore_id     = data.vsphere_datastore.datastore.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -97,21 +92,21 @@ resource "vsphere_virtual_machine" "rockyVM" {
 
   vapp {
     properties = {
-      "guestinfo.hostname" = "rockyVM",
-      #"guestinfo.ipaddress"    = "192.168.3.153",
-      #"guestinfo.netmask"      = "255.255.255.0",
-      #"guestinfo.gateway"      = "192.168.3.1",
-      #"guestinfo.dns"          = "8.8.8.8",
-      "guestinfo.domain"   = "example.com",
-      "guestinfo.ntp"      = "ntp.example.com",
-      "guestinfo.password" = "Thrunters1!FTW",
-      "guestinfo.ssh"      = "True"
+      "guestinfo.hostname"  = "betaRL",
+      "guestinfo.ipaddress" = "192.168.3.153",
+      "guestinfo.netmask"   = "255.255.255.0",
+      "guestinfo.gateway"   = "192.168.3.1",
+      "guestinfo.dns"       = "8.8.8.8",
+      "guestinfo.domain"    = "example.com",
+      "guestinfo.ntp"       = "ntp.example.com",
+      "guestinfo.password"  = "Thrunters1!FTW",
+      "guestinfo.ssh"       = "True"
     }
   }
 }
 
-resource "vsphere_virtual_machine" "kaliVM" {
-  name             = "kaliVM"
+resource "vsphere_virtual_machine" "betaKL" {
+  name             = "betaKL"
   datacenter_id    = data.vsphere_datacenter.dc.id
   datastore_id     = data.vsphere_datastore.datastore.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -122,7 +117,7 @@ resource "vsphere_virtual_machine" "kaliVM" {
 
   ovf_deploy {
     allow_unverified_ssl_cert = true
-    local_ovf_path            = "../output/KL/KL.ovf"
+    local_ovf_path            = "../output/KL/alphaKL.ovf"
     disk_provisioning         = "thin"
     ip_protocol               = "IPV4"
     ip_allocation_policy      = "STATIC_MANUAL"
@@ -134,15 +129,89 @@ resource "vsphere_virtual_machine" "kaliVM" {
 
   vapp {
     properties = {
-      "guestinfo.hostname" = "kaliVM",
-      #"guestinfo.ipaddress"    = "192.168.3.154",
-      #"guestinfo.netmask"      = "255.255.255.0",
-      #"guestinfo.gateway"      = "192.168.3.1",
-      #"guestinfo.dns"          = "8.8.8.8",
-      "guestinfo.domain"   = "example.com",
-      "guestinfo.ntp"      = "ntp.example.com",
-      "guestinfo.password" = "Thrunters1!FTW",
-      "guestinfo.ssh"      = "True"
+      "guestinfo.hostname"  = "betaKL",
+      "guestinfo.ipaddress" = "192.168.3.154",
+      "guestinfo.netmask"   = "255.255.255.0",
+      "guestinfo.gateway"   = "192.168.3.1",
+      "guestinfo.dns"       = "8.8.8.8",
+      "guestinfo.domain"    = "example.com",
+      "guestinfo.ntp"       = "ntp.example.com",
+      "guestinfo.password"  = "Thrunters1!FTW",
+      "guestinfo.ssh"       = "True"
+    }
+  }
+}
+
+resource "vsphere_virtual_machine" "betaWT" {
+  name             = "betaWT"
+  datacenter_id    = data.vsphere_datacenter.dc.id
+  datastore_id     = data.vsphere_datastore.datastore.id
+  resource_pool_id = data.vsphere_resource_pool.pool.id
+  host_system_id   = data.vsphere_host.host.id
+
+  wait_for_guest_net_timeout = 0
+  wait_for_guest_ip_timeout  = 0
+
+  ovf_deploy {
+    allow_unverified_ssl_cert = true
+    local_ovf_path            = "../output/win-10/alphaWin-10.ovf"
+    disk_provisioning         = "thin"
+    ip_protocol               = "IPV4"
+    ip_allocation_policy      = "STATIC_MANUAL"
+    ovf_network_map = {
+      "Network 1" = data.vsphere_network.network.id
+      "Network 2" = data.vsphere_network.network.id
+    }
+  }
+
+  vapp {
+    properties = {
+      "guestinfo.hostname"  = "betaWT",
+      "guestinfo.ipaddress" = "192.168.3.154",
+      "guestinfo.netmask"   = "255.255.255.0",
+      "guestinfo.gateway"   = "192.168.3.1",
+      "guestinfo.dns"       = "8.8.8.8",
+      "guestinfo.domain"    = "example.com",
+      "guestinfo.ntp"       = "ntp.example.com",
+      "guestinfo.password"  = "Thrunters1!FTW",
+      "guestinfo.ssh"       = "True"
+    }
+  }
+}
+
+resource "vsphere_virtual_machine" "betaWS" {
+  name             = "betaWS"
+  datacenter_id    = data.vsphere_datacenter.dc.id
+  datastore_id     = data.vsphere_datastore.datastore.id
+  resource_pool_id = data.vsphere_resource_pool.pool.id
+  host_system_id   = data.vsphere_host.host.id
+
+  wait_for_guest_net_timeout = 0
+  wait_for_guest_ip_timeout  = 0
+
+  ovf_deploy {
+    allow_unverified_ssl_cert = true
+    local_ovf_path            = "../output/ser-22/alphaSer-22.ovf"
+    disk_provisioning         = "thin"
+    ip_protocol               = "IPV4"
+    ip_allocation_policy      = "STATIC_MANUAL"
+    ovf_network_map = {
+      "Network 1" = data.vsphere_network.network.id
+      "Network 2" = data.vsphere_network.network.id
+    }
+  }
+
+  vapp {
+    properties = {
+      "guestinfo.hostname"  = "betaWS",
+      "guestinfo.ipaddress" = "192.168.3.154",
+      "guestinfo.netmask"   = "255.255.255.0",
+      "guestinfo.gateway"   = "192.168.3.1",
+      "guestinfo.dns"       = "8.8.8.8",
+      "guestinfo.domain"    = "example.com",
+      "guestinfo.ntp"       = "ntp.example.com",
+      "guestinfo.password"  = "Thrunters1!FTW",
+      "guestinfo.ssh"       = "True"
     }
   }
 }

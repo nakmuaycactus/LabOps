@@ -1,6 +1,6 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass
 
-$IP = "192.168.3.151"
+$IP = "192.168.3.154"
 $MaskBits = 24 # This means subnet mask = 255.255.255.0
 $Gateway = "192.168.3.1"
 $Dns = "1.1.1.1"

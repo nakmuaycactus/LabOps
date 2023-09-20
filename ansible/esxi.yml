@@ -2,9 +2,8 @@
 - hosts: esxi
   vars:
     vms_to_power_on:
-      - name: pkrUL
-      - name: pkrRL
-      - name: pkrKL
+      - name: betaUL
+      - name: betaRL
 
   tasks:
   - name: Power on VMs

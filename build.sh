@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd packer
 packer init linuxTemplate.pkr.hcl
 packer build -force -var-file=flavours/UL-pkrvars.hcl linuxTemplate.pkr.hcl
 packer build -force -var-file=flavours/RL-pkrvars.hcl linuxTemplate.pkr.hcl

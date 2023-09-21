@@ -15,5 +15,6 @@ ansible-galaxy collection install community.vmware
 ansible-galaxy collection install community.mysql
 
 ansible-playbook -i=hosts esxi.yml
+echo "Waiting 60 seconds for VMs to turn on"
 sleep 1m
 ansible-playbook -i=hosts ubuntu.yml rocky.yml

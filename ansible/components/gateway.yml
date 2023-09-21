@@ -3,7 +3,7 @@
   community.general.nmcli:
     conn_name: ens192
     type: ethernet
-    ip4: 192.168.3.153/24
+    ip4: 192.168.3.152/24
     gw4: 192.168.3.1
     state: present
 

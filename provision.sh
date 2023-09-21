@@ -10,8 +10,5 @@ ssh-keygen -R 192.168.3.152
 
 cd ../ansible
 ansible-playbook -i=hosts esxi.yml
-
 sleep 1m
-
-ansible-playbook -i=hosts ubuntu.yml
-ansible-playbook -i=hosts rocky.yml
+ansible-playbook -i=hosts ubuntu.yml rocky.yml

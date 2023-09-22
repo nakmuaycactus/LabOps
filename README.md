@@ -12,25 +12,33 @@ This project aims to deploy a combined fully functional Windows Active Directory
 
 ## Environment Setup
 
-To get started, follow these steps to set up your environment: (detailed instructions coming asap)
+**To get started, follow these steps to set up your environment:**
 
-Ensure that ESXi/Vcenter is properly configured. 
+**1. Ensure that ESXi/Vcenter is properly configured.**
 
-Create a new virtual machine if necessary
+**2. Create a new virtual machine if necessary**
 
 Testing was done on a [Rocky Linux 9.2 VM](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso) with 200GB+ memory
 
-Clone this repository to your local machine:
+**3. Clone this repository to your control node VM:**
 
     git clone https://github.com/nakmuaycactus/autoAD.git
 
-Install the required dependencies on your local system.
+**4. Install the required dependencies on your local system.**
 
 - [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
 - [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-    
-Optionally download any necessary ISO files:
+
+Example for Rocky 9.2
+
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    sudo apt-get update && sudo apt-get install packer
+    sudo yum -y install terraform
+    pip3.11 install --include-deps ansible
+        
+**5. Optionally download any necessary ISO files:**
 
 - [Windows 10](https://www.microsoft.com/en-au/software-download/windows10ISO)
 - [Win Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html)

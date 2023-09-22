@@ -24,6 +24,10 @@ Testing was done on a [Rocky Linux 9.2 VM](https://download.rockylinux.org/pub/r
 
     git clone https://github.com/nakmuaycactus/autoAD.git
 
+**3. Update repo variables for your own enviroment**
+
+    git clone https://github.com/nakmuaycactus/autoAD.git
+
 **4. Install the required dependencies on your local system.**
 
 - [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)

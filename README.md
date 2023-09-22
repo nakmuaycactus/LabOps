@@ -6,7 +6,7 @@ The aim of this project is to deploy a combined fully functional Windows Active 
 
 ### Features
 
-- Packer is used to create vmdk/ovf files based on (either locally or remotly hosted) iso files.
+- Packer is used to create vmdk/ovf files based on (either local or remote) iso files.
 - Terraform is used to provision virtual machines based on packer's exported iso files.
 - Ansible is used to apply post-provisioning to to terraform's provisioned machines.
 

@@ -22,18 +22,18 @@ Clone this repository to your local machine:
 
 Install the required dependencies on your local system.
 
-- Packer  - https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
-- Terraform - https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
-- Ansible - https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+- [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
     
 Optionally download any necessary ISO files:
 
-- Windows 10      - https://www.microsoft.com/en-au/software-download/windows10ISO
-- Win Server 2022 - https://info.microsoft.com/ww-landing-windows-server-2022.html
-- Win Server 2016 - https://info.microsoft.com/ww-landing-windows-server-2016.html
-- Ubuntu Linux    - https://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso
-- Rocky Linux     - https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso 
-- Kali Linux      - https://www.kali.org/get-kali/#kali-platforms
+- [Windows 10](https://www.microsoft.com/en-au/software-download/windows10ISO)
+- [Win Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html)
+- [Win Server 2016](https://info.microsoft.com/ww-landing-windows-server-2016.html)
+- [Ubuntu Linux](https://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso)
+- [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso)
+- [Kali Linux](https://cdimage.kali.org/kali-2023.3/kali-linux-2023.3-installer-amd64.iso)
 
 ## Build VMDK/OVF files by running Packer
     sh build.sh

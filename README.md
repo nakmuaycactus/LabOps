@@ -1,4 +1,4 @@
-# autoAD: An automated Active Directory and Linux home lab
+# autoAD: Automated Active Directory and Linux Home Lab
 
 ## Introduction
 

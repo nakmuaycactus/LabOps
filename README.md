@@ -51,7 +51,7 @@ Configured to have Packer, Terraform, and Ansible for recursive provisioning - T
 
 ### Ubuntu Linux
 
-Includes an intentionally vulnerable web app with vulnerabilities including susceptibility to SQLi, web shell uploads and brute force. 
+Includes an intentionally vulnerable web app with vulnerabilities like susceptibility to SQLi, web shell uploads and brute force attacks. 
 The VM is additionally set up with different logging types and technology, including Auditd, Auditbeat, Falco, and Apache logging.
 
 ### Kali Linux

@@ -17,6 +17,7 @@ To get started, follow these steps to set up your environment: (detailed instruc
 Ensure that ESXi/Vcenter is properly configured. 
 
 Create a new virtual machine if necessary
+
 Testing was done on a [Rocky Linux 9.2 VM](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso) with 200GB+ memory
 
 Clone this repository to your local machine:

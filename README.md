@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project aims to deploy a combined fully functional Windows Active Directory and multi-flavoured Linux home lab with the press of a script. This project uses a mixture of Packer, Terraform and Ansible against an ESXi and (somewhat optionally) Vcenter setup to firstly create baseline images for several Windows and Linux flavours and secondly provision the baseline images into automated VMs.
+This project aims to deploy a combined fully functional Windows Active Directory and multi-flavoured Linux home lab with the run of a script. This project combines the use of Packer, Terraform and Ansible together with an ESXi and (somewhat optionally) vCenter setup to - firstly - create baseline images for several Windows and Linux flavours and - secondly - provision the baseline images into automated VMs.
 
 ### Features
 

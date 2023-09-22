@@ -14,11 +14,13 @@ This project aims to deploy a combined fully functional Windows Active Directory
 
 To get started, follow these steps to set up your environment:
 
+Ensure that ESXi/Vcenter is properly configured. (detailed instructions coming soon)
+
 Clone this repository to your local machine:
 
     git clone https://github.com/nakmuaycactus/autoAD.git
 
-Install the required dependencies on your local system and ensure that ESXi/Vcenter is properly configured.
+Install the required dependencies on your local system.
 
 - Packer  - https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
 - Terraform - https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli

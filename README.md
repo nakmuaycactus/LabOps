@@ -56,16 +56,16 @@ The VM is additionally set up with different logging types and technology, inclu
 
 ### Kali Linux
 
-Standard Kali install for now, perhaps sliver and caldera eventually...
+Standard Kali install for now, perhaps sliver and caldera eventually
 
 ### Windows Server 2022
 
-Standard Windows Server 22 install, will be a domain controller eventually...
+Standard Windows Server 22 install, will be a domain controller eventually
 
 ### Windows 10
 
-Standard Windows 10 desktop, will be domain joined eventually...
+Standard Windows 10 desktop, will be domain joined eventually
 
 ### Windows Server 2016
 
-Dead broke for now
+Dead broke for now...

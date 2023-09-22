@@ -35,10 +35,12 @@ Optionally download any necessary ISO files:
 - [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso)
 - [Kali Linux](https://cdimage.kali.org/kali-2023.3/kali-linux-2023.3-installer-amd64.iso)
 
-## Build VMDK/OVF files by running Packer
+## Instructions
+
+### Build VMDK/OVF files by running Packer
     sh build.sh
 
-## Provision VMs by running Terraform/Ansible
+### Provision VMs by running Terraform/Ansible
     sh provision.sh
 
 ## Featured VMs

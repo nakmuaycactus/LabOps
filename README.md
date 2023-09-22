@@ -12,9 +12,9 @@ This project aims to deploy a combined fully functional Windows Active Directory
 
 ## Environment Setup
 
-To get started, follow these steps to set up your environment:
+To get started, follow these steps to set up your environment: (detailed instructions coming asap)
 
-Ensure that ESXi/Vcenter is properly configured. (detailed instructions coming soon)
+Ensure that ESXi/Vcenter is properly configured. 
 
 Clone this repository to your local machine:
 

@@ -34,7 +34,7 @@ Optionally download any necessary ISO files:
 - Kali Linux      - https://www.kali.org/get-kali/#kali-platforms
 
 ## Build vmdk/ovf files by running packer
-    sh packer/build.sh
+    sh build.sh
 
 ## Provision VMs by running terraform/ansible
     sh provision.sh
@@ -45,11 +45,21 @@ Optionally download any necessary ISO files:
 
 Configured to have Packer, Terraform, and Ansible for recursive provisioning - This VM acts as the control node for the lab.
 
-### Ubuntu
+### Ubuntu Linux
 
 Includes an intentionally vulnerable web-app with vulnerabilities including suspectibility to SQLi, webshell uploads and brute force.
 The VM is additionally setup with different logging types and technology, including Auditd, Auditbeat, Falco, and Apache logging.
 
+### Kali Linux
+
+Standard Kali install for now...
+
 ### Windows Server 2022
+
+Standard Windows Server 22 install for now, will be a domain controller eventually... 
+
+### Windows 10
+
+Standard Windows 10 desktop for now, will be domain joined eventually... 
 
 ### Windows Server 2016

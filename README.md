@@ -12,52 +12,15 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 
 ## Environment Setup
 
-**To get started, follow these steps to set up your environment:**
+See the [enviroment setup](https://github.com/nakmuaycactus/autoAD/wiki/Environment-Setup) wiki page for a detailed overview of setting up the environment
 
-**1. Ensure that ESXi/Vcenter is properly configured.**
+## Configuation Setup
 
-**2. Create a new virtual machine if necessary**
-
-Testing was done on a [Rocky Linux 9.2 VM](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso) with 200GB+ memory
-
-**3. Clone this repository to your control node VM:**
-
-    git clone https://github.com/nakmuaycactus/autoAD.git
-
-**3. Update repo variables for your own enviroment**
-
-    git clone https://github.com/nakmuaycactus/autoAD.git
-
-**4. Install the required dependencies on your local system.**
-
-- [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli)
-- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-
-Example for Rocky 9.2
-
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    sudo apt-get update && sudo apt-get install packer
-    sudo yum -y install terraform
-    pip3.11 install --include-deps ansible
-        
-**5. Optionally download any necessary ISO files:**
-
-- [Windows 10](https://www.microsoft.com/en-au/software-download/windows10ISO)
-- [Win Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html)
-- [Win Server 2016](https://info.microsoft.com/ww-landing-windows-server-2016.html)
-- [Ubuntu Linux](https://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso)
-- [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.2-x86_64-dvd.iso)
-- [Kali Linux](https://cdimage.kali.org/kali-2023.3/kali-linux-2023.3-installer-amd64.iso)
+See the [configuation setup](https://github.com/nakmuaycactus/autoAD/wiki/Configuration-Setup) wiki page for a detailed overview of modifying required configuations 
 
 ## Instructions
 
-### Build VMDK/OVF files by running Packer
-    sh build.sh
-
-### Provision VMs by running Terraform/Ansible
-    sh provision.sh
+See the [instructions](https://github.com/nakmuaycactus/autoAD/wiki/Instructions) wiki page for a detailed overview of how to use this project
 
 ## Featured VMs
 

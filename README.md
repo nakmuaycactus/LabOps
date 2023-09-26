@@ -1,8 +1,8 @@
-# autoAD: Automated Active Directory and Linux Home Lab
+# LabOpsX: Automation and Security testing playground
 
 ## Introduction
 
-This project aims to deploy a combined fully functional Windows Active Directory and multi-flavoured Linux home lab with the run of a script. This project combines the use of Packer, Terraform and Ansible together with an ESXi and (somewhat optionally) vCenter setup to - firstly - create baseline images for several Windows and Linux flavours and - secondly - provision the baseline images into automated VMs.
+This repo is a fusion of smaller initiatives, forming an ongoing journey with automated infrastructure and logging. It uses Packer, Terraform, and Ansible on an ESXi and vCenter instance (both 8.0; trial versions) to spin up, configure, and customise Windows and Linux systems. Falco, Auditd, and Apache logging are enabled for Linux hosts, along with Auditbeat as an optional log shipper (uses Auditd). Event logs are used for Windows and are configured to include the most important log sources (documented but not currently automated). Finally, there is an adversary simulation proof-of-concept using a custom C# Sliver C2 stager.
 
 ### Features
 

@@ -3,7 +3,6 @@
 - name: Update apt
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    become_password: packer
   apt: update_cache=yes
 - name: Install required software/ packages
   vars:

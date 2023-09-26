@@ -1,4 +1,4 @@
-# LabOpsX: Automation and Security testing playground
+# LabOps: Automation and Security testing playground
 
 ## Introduction
 

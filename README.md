@@ -23,9 +23,9 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 
 Some work goes into getting this project to work.
 
-See the [environment setup](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) wiki page for a detailed overview of setting up the required environment, including cloning this repo
+See the [environment setup wiki page](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) for a detailed overview of setting up the required environment, including cloning this repo
 
-See the [configurations setup](https://github.com/nakmuaycactus/LabOps/wiki/Configuration-Setup) wiki page for a detailed overview of modifying required configuations to get the project to work your specific enviroment
+See the [configuration setup wiki page](https://github.com/nakmuaycactus/LabOps/wiki/Configuration-Setup) for a detailed overview of modifying required configurations to get the project to work in your specific environment
 
 To use the project, run 
 

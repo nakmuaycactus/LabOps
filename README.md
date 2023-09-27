@@ -23,11 +23,7 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 
 Some work goes into getting this project to work.
 
-See the [environment setup](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) wiki page for a detailed overview of setting up the required environment
-
-Once the environment has been set up and configured, clone the repo using:
-    
-    https://github.com/nakmuaycactus/LabOps.git
+See the [environment setup](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) wiki page for a detailed overview of setting up the required environment, including cloning this repo
 
 See the [configurations setup](https://github.com/nakmuaycactus/LabOps/wiki/Configuration-Setup) wiki page for a detailed overview of modifying required configuations to get the project to work your specific enviroment
 

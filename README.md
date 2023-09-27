@@ -10,6 +10,18 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 - Terraform is used to provision virtual machines based on Packer's exported iso files.
 - Ansible is used to apply post-provisioning to Terraform's provisioned machines.
 
+### Featured VMs
+
+* Rocky Linux
+  * Configured to have Packer, Terraform, and Ansible for recursive provisioning - This VM can act as the control node for the lab.
+* Ubuntu Linux
+  * Includes an intentionally vulnerable web app with vulnerabilities like susceptibility to SQLi, web shell uploads and brute force attacks.
+  * The VM is additionally set up with different logging types and technology, including Auditd, Auditbeat, Falco, and Apache logging.
+* Kali Linux
+* Windows Server 2022
+* Windows 10
+* Windows Server 2016
+
 ## Project Setup
 
 A small amount of work goes into getting this project to work
@@ -29,31 +41,3 @@ To use the project, run
 and 
 
     sh provision.sh
-
-## Featured VMs
-
-* Rocky Linux
-
-  * Configured to have Packer, Terraform, and Ansible for recursive provisioning - This VM can act as the control node for the lab.
-
-* Ubuntu Linux
-
-  * Includes an intentionally vulnerable web app with vulnerabilities like susceptibility to SQLi, web shell uploads and brute force attacks.
-
-  * The VM is additionally set up with different logging types and technology, including Auditd, Auditbeat, Falco, and Apache logging.
-
-* Kali Linux
-
-  * Standard Kali install for now, perhaps sliver and caldera eventually
-
-* Windows Server 2022
-
-  * Standard Windows Server 22 install, will be a domain controller eventually
-
-* Windows 10
-
-  * Standard Windows 10 desktop, will be domain joined eventually
-
-* Windows Server 2016
-
-  * Dead broke for now...

@@ -26,7 +26,7 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 
 A small amount of work goes into getting this project to work
 
-See the [environment setup](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) wiki page for a detailed overview of setting up the ESXi/vCenter environment
+See the [environment setup](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup) wiki page for a detailed overview of setting up the required environment
 
 Once the environment has been set up and configured, clone the repo using:
     

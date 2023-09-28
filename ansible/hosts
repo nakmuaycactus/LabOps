@@ -13,6 +13,7 @@ kali   ansible_ssh_host=192.168.3.154
 [linux:vars]
 ansible_user=packer
 ansible_ssh_pass=packer
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [win]
 192.168.3.154

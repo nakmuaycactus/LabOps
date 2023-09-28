@@ -6,8 +6,6 @@ This repo is a fusion of smaller initiatives, forming an ongoing journey with au
 
 ## Project Setup
 
-Some work goes into getting this project to work.
-
 See the **[environment setup wiki page](https://github.com/nakmuaycactus/LabOps/wiki/Environment-Setup)** for a detailed overview of setting up the required environment, including cloning this repo
 
 See the **[configuration setup wiki page](https://github.com/nakmuaycactus/LabOps/wiki/Configuration-Setup)** for a detailed overview of modifying required configurations to get the project to work in your specific environment
@@ -27,7 +25,7 @@ and
   * Configured to have Packer, Terraform, and Ansible for recursive provisioning
 * Ubuntu Linux
   * Generic Linux server
-  * Includes an intentionally vulnerable web app with susceptibility to SQLi, web shell uploads, and weak credentials.
+  * Includes an intentionally vulnerable web app with susceptibility to SQLi, web shell uploads, and weak credentials
 * Kali Linux
   * Red team box
 * Windows Server 2022

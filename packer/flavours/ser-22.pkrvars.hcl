@@ -1,6 +1,6 @@
 vm_name             = "alphaSer-22"
 guest_os_type       = "windows9_64Guest"
-iso_paths           = ["[AD-VMs] ISOs/win-10-usa.iso", "[AD-VMs] ISOs/windows.iso"]
+iso_paths           = ["[AD-VMs] ISOs/win-server-2022-x64.iso", "[AD-VMs] ISOs/windows.iso"]
 CPUs                = 4
 floppy_files        = ["http/ser-22-setup/"]
 floppy_img_path     = "[AD-VMs] ISOs/pvscsi-Windows8.flp"

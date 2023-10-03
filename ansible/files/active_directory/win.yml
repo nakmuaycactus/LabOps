@@ -2,15 +2,6 @@
 - hosts: win
  
   tasks:
-#    - name: Install RSAT
- #     win_psmodule: name={{ item }} state=present
-  #    AcceptLicense: yes
-   #   with_items:
-    #    - RSAT ServerManager
-
-#      win_feature:
- #       name: RSAT
-  #      state: present
 
     - name: Install AD Services feature
       win_feature:
@@ -22,7 +13,7 @@
 
     - name: Create new forest
       win_domain:
-        dns_domain_name: sgv
+        dns_domain_name: esgeevee
         safe_mode_password: Thrunters1!FTW
       register: result
 

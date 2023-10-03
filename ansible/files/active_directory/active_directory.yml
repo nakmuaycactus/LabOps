@@ -6,12 +6,12 @@
     dc_address: 192.168.3.154
     dc_netmask_cidr: 24
     dc_gateway: 192.168.3.1
-    dc_hostname: 'ans_dc'
-    domain_name: "sgv.org"
+    dc_hostname: 'ansDC01'
+    domain_name: "esgeevee.org"
     local_admin: '.\Administrator'
-    temp_password: 'Changeme!'
-    dc_password: 'Pa$$w0rd123'
-    recovery_password: 'Pa$$w0rd123'
+    temp_password: 'packer'
+    dc_password: 'packer'
+    recovery_password: 'Thrunters1!FTW'
     upstream_dns_1: 8.8.8.8
     upstream_dns_2: 1.1.1.1
     # reverse_dns_zone: "172.16.108.0/24"
@@ -91,15 +91,6 @@
       name: w32time
       state: started  
     delegate_to: '{{ dc_address }}'
-  - name: Disable firewall for Domain, Public and Private profiles
-    win_firewall:
-      state: disabled
-      profiles:
-      - Domain
-      - Private
-      - Public
-    tags: disable_firewall
-    delegate_to: '{{ dc_address }}'
   - name: Change the hostname 
     win_hostname:
       name: '{{ dc_hostname }}'
@@ -135,21 +126,3 @@
       ipv4_addresses:
       - '127.0.0.1'
     delegate_to: '{{ dc_address }}'
-  # - name: Create reverse DNS zone
-  #  win_shell: "Add-DnsServerPrimaryZone -NetworkID {{reverse_dns_zone}} -ReplicationScope Forest"
-  #  delegate_to: "{{ dc_address }}"    
-  #  retries: 30
-  #  delay: 60
-  #  register: result           
-  #  until: result is succeeded
-  - name: Check for xRemoteDesktopAdmin Powershell module
-    win_psmodule:
-      name: xRemoteDesktopAdmin
-      state: present
-    delegate_to: "{{ dc_address }}"
-  - name: Enable Remote Desktop
-    win_dsc:
-      resource_name: xRemoteDesktopAdmin
-      Ensure: present
-      UserAuthentication: NonSecure
-    delegate_to: "{{ dc_address }}"

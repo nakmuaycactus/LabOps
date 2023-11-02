@@ -1,0 +1,5 @@
+---
+- hosts: win
+
+  tasks:
+    - include_tasks: components/AD_Controller.yml
